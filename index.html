@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>California + Federal Tax Calculator | Free Retirement &amp; Capital Gains Planner</title>
+<meta name="description" content="Free California and federal income tax calculator. Estimate taxes on retirement, 401(k) withdrawals, Roth IRA, capital gains, dividends, and Social Security. Includes expense planning and coverage analysis for CA residents.">
+<meta name="keywords" content="California tax calculator, federal income tax calculator, retirement income tax California, capital gains tax calculator, 401k withdrawal tax, Roth IRA tax free, LTCG tax rate, income planning California, CA tax planner">
+<meta name="author" content="CA Tax Calculator">
+<link rel="canonical" href="https://taxcalcca.com/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://taxcalcca.com/">
+<meta property="og:title" content="California + Federal Tax Calculator — Free Tool">
+<meta property="og:description" content="Instantly estimate CA + federal taxes on retirement income, capital gains, 401k, Roth IRA, Social Security, and more. Free online calculator with expense planning.">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="California + Federal Tax Calculator">
+<meta name="twitter:description" content="Free CA + federal tax calculator for retirement income, capital gains, and financial planning. No signup needed.">
+<!-- Google Analytics 4 — REPLACE G-EYW9ZRLN1N with your Measurement ID from analytics.google.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EYW9ZRLN1N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-EYW9ZRLN1N');</script>
+<!-- Google AdSense Auto-Ads — REPLACE ca-pub-5681396352688184 with your Publisher ID from adsense.google.com -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5681396352688184" crossorigin="anonymous"></script>
+<!-- Schema.org structured data -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"California + Federal Tax Calculator","description":"Free California and federal income tax calculator for retirement, capital gains, and financial planning.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://taxcalcca.com/"}</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#eef0f4;color:#1a1a2e;font-size:14px}
+h1{text-align:center;padding:18px 0 4px;font-size:1.4rem;color:#1a1a2e}
+.subtitle{text-align:center;color:#777;font-size:.8rem;margin-bottom:14px}
+.layout{display:grid;grid-template-columns:370px 1fr;gap:14px;padding:0 14px 30px;max-width:1350px;margin:0 auto}
+.left{display:flex;flex-direction:column;gap:10px}
+.right{display:flex;flex-direction:column;gap:10px}
+.card{background:#fff;border-radius:10px;padding:16px;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+.card h2{font-size:.88rem;font-weight:700;margin-bottom:12px;padding-bottom:7px;border-bottom:2px solid #e8eaed;display:flex;align-items:center;gap:6px}
+.sec{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#999;margin:11px 0 6px}
+.ir{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;gap:6px}
+.ir label{font-size:.82rem;color:#444;flex:1;line-height:1.3}
+.ir input[type=number]{width:120px;padding:4px 7px;border:1px solid #ddd;border-radius:5px;font-size:.82rem;text-align:right;background:#fafafa}
+.ir input:focus{outline:none;border-color:#4f46e5;background:#fff}
+.ir .hint{font-size:.7rem;color:#aaa;width:90px;text-align:right;white-space:nowrap}
+.mo-row{display:flex;align-items:center;margin-bottom:5px;gap:6px}
+.mo-row label{font-size:.82rem;color:#444;flex:1}
+.mo-row input{width:100px;padding:4px 7px;border:1px solid #ddd;border-radius:5px;font-size:.82rem;text-align:right;background:#fafafa}
+.mo-row input:focus{outline:none;border-color:#4f46e5;background:#fff}
+.mo-row .mo-unit{font-size:.72rem;color:#888;white-space:nowrap}
+.mo-row .mo-annual{font-size:.72rem;color:#4f46e5;white-space:nowrap;min-width:80px;text-align:right}
+select{width:100%;padding:6px 9px;border:1px solid #ddd;border-radius:6px;font-size:.84rem;background:#fff;cursor:pointer}
+select:focus{outline:none;border-color:#4f46e5}
+.cb{display:flex;align-items:center;gap:7px;font-size:.82rem;color:#444;margin-bottom:5px;cursor:pointer}
+.cb input{cursor:pointer}
+.badge{display:inline-block;padding:1px 6px;border-radius:8px;font-size:.68rem;font-weight:600}
+.b-blue{background:#dbeafe;color:#1d4ed8}
+.b-red{background:#fee2e2;color:#dc2626}
+.b-green{background:#d1fae5;color:#065f46}
+.b-orange{background:#ffedd5;color:#c2410c}
+.b-gray{background:#f3f4f6;color:#6b7280}
+.b-yellow{background:#fef9c3;color:#854d0e}
+hr{border:none;border-top:1px solid #eee;margin:10px 0}
+.note{font-size:.72rem;color:#888;font-style:italic;margin-top:3px}
+/* tax summary cards */
+.tax-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.tc{border-radius:9px;padding:14px;color:#fff}
+.tc-fed{background:linear-gradient(135deg,#1e3a5f,#2d5986)}
+.tc-ca{background:linear-gradient(135deg,#6b1f1f,#a33030)}
+.tc-comb{background:linear-gradient(135deg,#1a3a2c,#27694a)}
+.tc h3{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.75;margin-bottom:8px}
+.tc .amount{font-size:1.7rem;font-weight:700;margin-bottom:3px}
+.tc .sub{font-size:.73rem;opacity:.7;margin-bottom:8px}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.18);border-radius:5px;padding:3px 9px;font-size:.72rem}
+.pill strong{display:block;font-size:.9rem;font-weight:700}
+/* timeline */
+.timeline-bar{position:relative;height:52px;margin:10px 0 4px}
+.tl-track{position:absolute;top:22px;left:0;right:0;height:4px;background:#e0e3ea;border-radius:2px}
+.tl-fill{position:absolute;top:22px;left:0;height:4px;background:#4f46e5;border-radius:2px;transition:width .3s}
+.tl-marker{position:absolute;top:14px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.tl-dot-now{background:#4f46e5}
+.tl-dot-mid{background:#f59e0b}
+.tl-dot-end{background:#10b981}
+.tl-label{font-size:.65rem;margin-top:3px;white-space:nowrap;color:#555;font-weight:600}
+.tl-sub{font-size:.6rem;color:#999;white-space:nowrap}
+.tl-lock{font-size:.67rem;color:#c2410c;background:#ffedd5;border-radius:4px;padding:1px 5px;display:inline-block;margin-top:2px}
+.tl-unlock{font-size:.67rem;color:#065f46;background:#d1fae5;border-radius:4px;padding:1px 5px;display:inline-block;margin-top:2px}
+/* coverage analysis */
+.cov-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cov-box{border-radius:8px;padding:12px}
+.cov-need{background:#f0f4ff;border:1px solid #c7d7fd}
+.cov-have{background:#f0fdf4;border:1px solid #bbf7d0}
+.cov-box h4{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;margin-bottom:8px}
+.cov-row{display:flex;justify-content:space-between;font-size:.82rem;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.cov-row:last-child{border-bottom:none;font-weight:700;font-size:.88rem;padding-top:5px}
+.gap-box{border-radius:8px;padding:14px;margin-top:10px}
+.gap-surplus{background:#dcfce7;border:1px solid #86efac}
+.gap-deficit{background:#fee2e2;border:1px solid #fca5a5}
+.gap-neutral{background:#f3f4f6;border:1px solid #d1d5db}
+.gap-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.gap-amount{font-size:1.8rem;font-weight:800;margin-bottom:4px}
+.gap-surplus .gap-amount{color:#16a34a}
+.gap-deficit .gap-amount{color:#dc2626}
+/* grossup table */
+table{width:100%;border-collapse:collapse;font-size:.79rem}
+thead th{background:#f5f6fa;padding:7px 9px;text-align:left;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:#777;border-bottom:2px solid #e8eaed}
+tbody td{padding:6px 9px;border-bottom:1px solid #f0f1f6}
+tbody tr:last-child td{border-bottom:none;font-weight:700;background:#f8f9fc}
+tbody tr:hover{background:#f7f8fd}
+.neg{color:#b91c1c}
+.pos{color:#15803d}
+.warn{color:#c2410c}
+/* deduction compare */
+.deduct-compare{display:flex;gap:8px;margin-top:6px}
+.dc-box{flex:1;border-radius:6px;padding:7px 10px;font-size:.75rem}
+.dc-active{background:#e0e7ff;border:1px solid #818cf8}
+.dc-inactive{background:#f3f4f6;border:1px solid #e5e7eb;color:#9ca3af}
+.dc-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.dc-amount{font-size:1rem;font-weight:700}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.tax-grid{grid-template-columns:1fr 1fr}}
+/* ── website / monetization additions ── */
+.site-topbar{background:#fff;border-bottom:1px solid #e8eaed;text-align:center;padding:8px 0;overflow:hidden}
+.site-footer{background:#1a1a2e;color:#aaa;padding:28px 14px 20px;margin-top:20px;font-size:.78rem;line-height:1.7}
+.site-footer .fi{max-width:1350px;margin:0 auto}
+.site-footer .disclaimer{border:1px solid #2d3152;border-radius:8px;padding:12px 16px;margin-bottom:18px;color:#9ca3af}
+.site-footer .disclaimer strong{color:#e8eaed}
+.share-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.share-row span{color:#e8eaed;font-size:.82rem;font-weight:600;white-space:nowrap}
+.sbtn{padding:6px 14px;border-radius:6px;font-size:.78rem;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-block;color:#fff;transition:opacity .15s}
+.sbtn:hover{opacity:.85}
+.sb-x{background:#000}.sb-li{background:#0a66c2}.sb-copy{background:#4f46e5}
+.footer-links{border-top:1px solid #2d3152;padding-top:10px;margin-top:6px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.footer-links a{color:#a5b4fc;text-decoration:none}
+.footer-links a:hover{text-decoration:underline}
+.ad-rect{text-align:center;padding:10px 0;margin:6px 0}
+@media(max-width:700px){.share-row{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<!-- TOP LEADERBOARD AD — replace slot ID after AdSense approval -->
+<div class="site-topbar">
+  <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px;max-width:100%" data-ad-client="ca-pub-5681396352688184" data-ad-slot="1111111111"></ins>
+  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+
+<h1>California + Federal Tax Calculator</h1>
+<p class="subtitle">Free tool for California residents &mdash; Retirement, 401(k), Roth IRA, Capital Gains, Deductions &amp; Expense Coverage &mdash; Tax Year <span id="taxYearLabel"></span></p>
+
+<div class="layout">
+<!-- ═══════════════════════════════ LEFT INPUTS ═══════════════════════════════ -->
+<div class="left">
+
+<!-- PROFILE -->
+<div class="card">
+  <h2>👤 Profile</h2>
+  <div class="ir"><label>Current Age</label><input type="number" id="age" value="48" min="0" max="100" onchange="calc()"></div>
+  <div class="ir"><label>Filing Status</label></div>
+  <select id="filingStatus" onchange="calc()" style="margin-bottom:8px">
+    <option value="single">Single</option>
+    <option value="mfj">Married Filing Jointly (MFJ)</option>
+    <option value="hoh">Head of Household</option>
+  </select>
+  <div class="cb"><input type="checkbox" id="age65" onchange="calc()"><label>Age 65+ (extra std. deduction)</label></div>
+  <div id="spouseRow" style="display:none" class="cb"><input type="checkbox" id="spouseAge65" onchange="calc()"><label>Spouse also 65+</label></div>
+</div>
+
+<!-- INCOME -->
+<div class="card">
+  <h2>💰 Income Sources</h2>
+
+  <div class="sec">Earned &amp; Investment (Available Now)</div>
+  <div class="ir"><label>Wages / Salary</label><input type="number" id="wages" value="0" min="0" onchange="calc()"></div>
+  <div class="sec" style="margin-top:8px">Short-Term Cap. Gains <span class="badge b-gray">Taxed as Ordinary</span></div>
+  <div class="ir"><label>Sale proceeds (total cash received)</label><input type="number" id="stcgProceeds" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>Cost basis (what you originally paid)</label><input type="number" id="stcgBasis" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>Taxable gain (auto-calculated)</label><span id="stcgGainDisplay" style="font-size:.85rem;font-weight:700;color:#b91c1c">$0</span></div>
+  <div class="sec" style="margin-top:8px">Long-Term Cap. Gains <span class="badge b-blue">0/15/20% Federal</span></div>
+  <div class="ir"><label>Sale proceeds (total cash received)</label><input type="number" id="ltcgProceeds" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>Cost basis (what you originally paid)</label><input type="number" id="ltcgBasis" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>Taxable gain (auto-calculated)</label><span id="ltcgGainDisplay" style="font-size:.85rem;font-weight:700;color:#b91c1c">$0</span></div>
+  <p class="note">Your cost basis is returned tax-free — only the gain is taxed. Full proceeds count toward cash available to spend.</p>
+  <div class="ir"><label>Qualified Dividends <span class="badge b-blue">0/15/20%</span></label><input type="number" id="qualDiv" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>Pension / Annuity</label><input type="number" id="pension" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>Social Security <span class="badge b-yellow">CA Exempt</span></label><input type="number" id="ss" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>Other Ordinary Income</label><input type="number" id="otherOrd" value="0" min="0" onchange="calc()"></div>
+
+  <div class="sec" style="display:flex;align-items:center;gap:6px">
+    Retirement Accounts
+    <span id="acctBadge" class="badge b-red">🔒 Locked until 59.5</span>
+  </div>
+  <div id="penaltyNotice" style="background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:8px 10px;font-size:.76rem;color:#c2410c;margin-bottom:7px">
+    ⚠️ Withdrawals before age 59.5 incur a <strong>10% federal + 2.5% CA early withdrawal penalty</strong> on top of income tax. Penalty applied to amounts entered below.
+  </div>
+  <div class="ir"><label>Traditional 401k / IRA Withdrawals</label><input type="number" id="trad401k" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>Required Min. Distributions (RMDs)</label><input type="number" id="rmd" value="0" min="0" onchange="calc()"></div>
+
+  <div class="sec">Tax-Free Income</div>
+  <div class="ir"><label>Roth IRA Distributions <span class="badge b-green">Tax-Free</span></label><input type="number" id="roth" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>529 / Educ. Savings (qualified) <span class="badge b-green">Tax-Free</span></label><input type="number" id="fiveTwentyNine" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>Muni Bond Interest <span class="badge b-green">Tax-Free</span></label><input type="number" id="muniBond" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>HSA Distributions (qualified) <span class="badge b-green">Tax-Free</span></label><input type="number" id="hsa" value="0" min="0" onchange="calc()"></div>
+</div>
+
+<!-- DEDUCTIONS -->
+<div class="card">
+  <h2>🧾 Deductions</h2>
+  <div class="cb"><input type="checkbox" id="itemize" onchange="calc()"><label><strong>Itemize deductions</strong> (overrides standard if higher)</label></div>
+
+  <div id="itemizeSection" style="display:none">
+    <div class="sec">Mortgage</div>
+    <div class="ir"><label>Mortgage interest paid (annual)</label><input type="number" id="mortgageInt" value="0" min="0" onchange="calc()"></div>
+    <p class="note">Deductible on up to $750K of mortgage principal</p>
+
+    <div class="sec">State &amp; Local Taxes (SALT)</div>
+    <div class="ir"><label>Property taxes paid (annual)</label><input type="number" id="propTax" value="0" min="0" onchange="calc()"></div>
+    <div class="ir"><label>State income taxes paid (prior year)</label><input type="number" id="stateTax" value="0" min="0" onchange="calc()"></div>
+    <div style="font-size:.74rem;background:#fef9c3;border:1px solid #fde68a;border-radius:5px;padding:6px 9px;margin-top:3px">
+      <strong>Federal SALT cap: $10,000</strong> — Fed deduction = min($10K, prop tax + state income tax)<br>
+      CA has <strong>no SALT cap</strong> — CA deducts property taxes in full (not state income tax)
+    </div>
+    <div class="ir" style="margin-top:6px"><label>Fed SALT deduction (auto)</label><span id="saltFedDisplay" style="font-size:.82rem;color:#4f46e5;font-weight:600">$0</span></div>
+    <div class="ir"><label>CA property tax deduction (auto)</label><span id="saltCADisplay" style="font-size:.82rem;color:#4f46e5;font-weight:600">$0</span></div>
+
+    <div class="sec">Charitable Contributions</div>
+    <div class="ir"><label>Cash donations</label><input type="number" id="charityCash" value="0" min="0" onchange="calc()"></div>
+    <div class="ir"><label>Non-cash / property donations</label><input type="number" id="charityNonCash" value="0" min="0" onchange="calc()"></div>
+
+    <div class="sec">Medical Expenses</div>
+    <div class="ir"><label>Total out-of-pocket medical (annual)</label><input type="number" id="medicalTotal" value="0" min="0" onchange="calc()"></div>
+    <div class="ir"><label>Deductible amount (above 7.5% AGI, auto)</label><span id="medDeductDisplay" style="font-size:.82rem;color:#4f46e5;font-weight:600">$0</span></div>
+
+    <div class="sec">Other Itemized</div>
+    <div class="ir"><label>Other deductions (investment interest, etc.)</label><input type="number" id="otherDeduct" value="0" min="0" onchange="calc()"></div>
+  </div>
+
+  <div class="sec">Deduction Summary</div>
+  <div class="deduct-compare">
+    <div id="fedStdBox" class="dc-box dc-active">
+      <div class="dc-label">Federal Standard</div>
+      <div class="dc-amount" id="fedStdAmt">$15,000</div>
+    </div>
+    <div id="fedItemBox" class="dc-box dc-inactive">
+      <div class="dc-label">Federal Itemized</div>
+      <div class="dc-amount" id="fedItemAmt">$0</div>
+    </div>
+  </div>
+  <div class="deduct-compare" style="margin-top:5px">
+    <div id="caStdBox" class="dc-box dc-active">
+      <div class="dc-label">CA Standard</div>
+      <div class="dc-amount" id="caStdAmt">$5,363</div>
+    </div>
+    <div id="caItemBox" class="dc-box dc-inactive">
+      <div class="dc-label">CA Itemized</div>
+      <div class="dc-amount" id="caItemAmt">$0</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPENSES -->
+<div class="card">
+  <h2>🏠 Annual Expenses</h2>
+  <p class="note" style="margin-bottom:8px">Monthly inputs auto-multiply ×12. Enter what you actually spend or plan to spend.</p>
+
+  <div class="sec">Housing (monthly)</div>
+  <div class="mo-row"><label>Mortgage P&amp;I</label><input type="number" id="eMortgage" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="eMortgageA">= $0/yr</span></div>
+  <div class="mo-row"><label>Property tax (escrow or direct)</label><input type="number" id="ePropTax" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="ePropTaxA">= $0/yr</span></div>
+  <div class="mo-row"><label>HOA + home insurance</label><input type="number" id="eHOA" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="eHOAA">= $0/yr</span></div>
+  <div class="mo-row"><label>Maintenance &amp; repairs</label><input type="number" id="eMaint" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="eMaintA">= $0/yr</span></div>
+
+  <div class="sec">Education (annual)</div>
+  <div class="ir"><label>Son's college tuition &amp; fees</label><input type="number" id="eCollegeTuition" value="0" min="0" onchange="calc()"></div>
+  <div class="ir"><label>College room, board &amp; supplies</label><input type="number" id="eCollegeRoom" value="0" min="0" onchange="calc()"></div>
+
+  <div class="sec">Cost of Living (monthly)</div>
+  <div class="mo-row"><label>Groceries &amp; dining out</label><input type="number" id="eFood" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="eFoodA">= $0/yr</span></div>
+  <div class="mo-row"><label>Utilities (electric, gas, water, internet)</label><input type="number" id="eUtil" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="eUtilA">= $0/yr</span></div>
+  <div class="mo-row"><label>Transportation (car, gas, insurance)</label><input type="number" id="eTransport" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="eTransportA">= $0/yr</span></div>
+  <div class="mo-row"><label>Healthcare (premiums + out-of-pocket)</label><input type="number" id="eHealth" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="eHealthA">= $0/yr</span></div>
+  <div class="mo-row"><label>Clothing &amp; personal care</label><input type="number" id="eClothing" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="eClothingA">= $0/yr</span></div>
+  <div class="mo-row"><label>Entertainment &amp; subscriptions</label><input type="number" id="eEntertain" value="0" min="0" onchange="calc()"><span class="mo-unit">/mo</span><span class="mo-annual" id="eEntertainA">= $0/yr</span></div>
+
+  <div class="sec">Travel (annual)</div>
+  <div class="ir"><label>Travel &amp; vacations</label><input type="number" id="eTravel" value="0" min="0" onchange="calc()"></div>
+
+  <div class="sec">Other</div>
+  <div class="ir"><label>Other annual expenses</label><input type="number" id="eOther" value="0" min="0" onchange="calc()"></div>
+
+  <hr>
+  <div class="ir" style="margin-top:6px">
+    <label style="font-weight:700">Total Annual Expenses</label>
+    <span id="totalExpenses" style="font-size:1rem;font-weight:800;color:#dc2626">$0</span>
+  </div>
+  <div style="text-align:right;font-size:.75rem;color:#888" id="totalExpensesMo">(= $0 / month)</div>
+</div>
+
+<!-- SIDEBAR RECTANGLE AD — replace slot ID after AdSense approval -->
+<div class="card ad-rect">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5681396352688184" data-ad-slot="2222222222" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+
+</div><!-- end left -->
+
+<!-- ═══════════════════════════════ RIGHT RESULTS ══════════════════════════════ -->
+<div class="right">
+
+<!-- PLANNING TIMELINE -->
+<div class="card">
+  <h2>📅 Planning Timeline</h2>
+  <div class="timeline-bar" id="tlBar">
+    <div class="tl-track"></div>
+    <div class="tl-fill" id="tlFill" style="width:0%"></div>
+    <!-- markers injected by JS -->
+  </div>
+  <div id="tlDetails" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:4px;font-size:.75rem"></div>
+</div>
+
+<!-- TAX SUMMARY -->
+<div class="tax-grid">
+  <div class="tc tc-fed">
+    <h3>Federal Tax</h3>
+    <div class="amount" id="fedTotal">$0</div>
+    <div class="sub" id="fedSub">on $0 taxable</div>
+    <div class="pills">
+      <div class="pill">Effective<strong id="fedEff">0.0%</strong></div>
+      <div class="pill">Marginal<strong id="fedMarg">0%</strong></div>
+    </div>
+  </div>
+  <div class="tc tc-ca">
+    <h3>California Tax</h3>
+    <div class="amount" id="caTotal">$0</div>
+    <div class="sub" id="caSub">on $0 taxable</div>
+    <div class="pills">
+      <div class="pill">Effective<strong id="caEff">0.0%</strong></div>
+      <div class="pill">Marginal<strong id="caMarg">0%</strong></div>
+    </div>
+  </div>
+  <div class="tc tc-comb">
+    <h3>Combined + Penalties</h3>
+    <div class="amount" id="combTotal">$0</div>
+    <div class="sub" id="combSub">total tax burden</div>
+    <div class="pills">
+      <div class="pill">Combined Eff.<strong id="combEff">0.0%</strong></div>
+      <div class="pill">NIIT<strong id="niitAmt">$0</strong></div>
+      <div class="pill">Penalties<strong id="penaltyAmt">$0</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- GROSS INCOME vs TAKE-HOME -->
+<div class="card">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center">
+    <div>
+      <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:3px">Total Gross Income</div>
+      <div style="font-size:1.4rem;font-weight:800" id="grossIncome">$0</div>
+    </div>
+    <div>
+      <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:3px">Total Cash Available</div>
+      <div style="font-size:1.4rem;font-weight:800;color:#1d4ed8" id="afterTaxIncome">$0</div>
+      <div style="font-size:.68rem;color:#888">(after-tax + basis returned)</div>
+    </div>
+    <div>
+      <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:3px">Gross-Up Factor</div>
+      <div style="font-size:1.4rem;font-weight:800;color:#7c3aed" id="grossUpFactor">—</div>
+      <div style="font-size:.68rem;color:#888">per $1 of expense (wages)</div>
+    </div>
+  </div>
+</div>
+
+<!-- COVERAGE ANALYSIS -->
+<div class="card">
+  <h2>📊 Coverage Analysis — Can You Cover Your Costs?</h2>
+  <div class="cov-grid">
+    <div class="cov-box cov-need">
+      <h4>What You Need (Annual)</h4>
+      <div class="cov-row"><span>Living expenses</span><span id="covExpenses">$0</span></div>
+      <div class="cov-row"><span>Federal tax</span><span class="neg" id="covFedTax">$0</span></div>
+      <div class="cov-row"><span>California tax</span><span class="neg" id="covCATax">$0</span></div>
+      <div class="cov-row"><span>Early withdrawal penalties</span><span class="warn" id="covPenalty">$0</span></div>
+      <div class="cov-row"><span>TOTAL NEEDED (gross)</span><span id="covTotalNeed">$0</span></div>
+    </div>
+    <div class="cov-box cov-have">
+      <h4>What You Have (Annual)</h4>
+      <div class="cov-row"><span>Gross income</span><span id="covGross">$0</span></div>
+      <div class="cov-row"><span>Tax-free + basis returned</span><span class="pos" id="covTaxFree">$0</span></div>
+      <div class="cov-row"><span>Total cash available</span><span class="pos" id="covAfterTax">$0</span></div>
+      <div class="cov-row"><span>Expenses covered</span><span id="covExpCovered">$0 / $0</span></div>
+      <div class="cov-row"><span>SURPLUS / (DEFICIT)</span><span id="covGap">$0</span></div>
+    </div>
+  </div>
+
+  <div class="gap-box gap-neutral" id="gapBox">
+    <div class="gap-title" id="gapTitle">ENTER INCOME AND EXPENSES TO SEE ANALYSIS</div>
+    <div class="gap-amount" id="gapAmount">—</div>
+    <div style="font-size:.8rem" id="gapDetail"></div>
+  </div>
+
+  <div id="grossUpSection" style="margin-top:12px;display:none">
+    <div class="sec" style="margin-top:0">To Cover Deficit — Gross Income Required Per Source</div>
+    <p class="note" style="margin-bottom:6px">Uses current marginal rates. Early withdrawal penalty included if age &lt; 59.5.</p>
+    <table>
+      <thead><tr><th>Income Source</th><th>After-Tax Deficit</th><th>Gross Needed</th><th>Extra Tax Cost</th><th>Combined Rate</th></tr></thead>
+      <tbody id="grossUpBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- EXPENSE BREAKDOWN -->
+<div class="card" id="expBreakdownSection" style="display:none">
+  <h2>🧮 Expense Coverage — How Much Gross Income Per Expense</h2>
+  <p class="note" style="margin-bottom:8px">Shows the gross wages needed to net enough to pay each expense after federal + CA taxes at <strong>current marginal rates</strong>.</p>
+  <table>
+    <thead><tr><th>Expense</th><th>Annual Cost</th><th>Gross Wages Needed</th><th>Gross LTCG Needed</th><th>401k (with penalty)</th></tr></thead>
+    <tbody id="expBreakBody"></tbody>
+  </table>
+</div>
+
+<!-- INCOME BREAKDOWN TABLE -->
+<div class="card">
+  <h2>📋 Income Type Breakdown</h2>
+  <table>
+    <thead><tr><th>Income Type</th><th>Amount</th><th>Federal Treatment</th><th>CA Treatment</th><th>Fed Tax</th><th>CA Tax</th></tr></thead>
+    <tbody id="incomeBreakBody"></tbody>
+  </table>
+</div>
+
+<!-- BRACKET TABLES -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+  <div class="card">
+    <h2>Federal Bracket Breakdown</h2>
+    <table><thead><tr><th>Rate</th><th>Bracket</th><th>In Bracket</th><th>Tax</th></tr></thead>
+    <tbody id="fedBracketBody"></tbody></table>
+    <p class="note" style="margin-top:6px" id="fedDeductNote"></p>
+  </div>
+  <div class="card">
+    <h2>California Bracket Breakdown</h2>
+    <table><thead><tr><th>Rate</th><th>Bracket</th><th>In Bracket</th><th>Tax</th></tr></thead>
+    <tbody id="caBracketBody"></tbody></table>
+    <p class="note" style="margin-top:6px">CA taxes all cap gains as ordinary income. SS benefits are CA-exempt.</p>
+    <p class="note" id="caDeductNote"></p>
+  </div>
+</div>
+
+</div><!-- end right -->
+</div><!-- end layout -->
+
+<script>
+// ─── 2025 TAX PARAMETERS ────────────────────────────────────────────────────
+const P = {
+  single:{
+    fedStd:15000, fedStdAge65:2000, caStd:5363,
+    fedBrackets:[[11925,.10],[48475,.12],[103350,.22],[197300,.24],[250525,.32],[626350,.35],[Infinity,.37]],
+    ltcgBrackets:[[48350,0],[533400,.15],[Infinity,.20]],
+    caBrackets:[[10756,.01],[25499,.02],[40245,.04],[55866,.06],[70606,.08],[360659,.093],[432787,.103],[721314,.113],[Infinity,.123]],
+    niitThresh:200000, ssT1:25000, ssT2:34000
+  },
+  mfj:{
+    fedStd:30000, fedStdAge65:1600, caStd:10726,
+    fedBrackets:[[23850,.10],[96950,.12],[206700,.22],[394600,.24],[501050,.32],[751600,.35],[Infinity,.37]],
+    ltcgBrackets:[[96700,0],[600050,.15],[Infinity,.20]],
+    caBrackets:[[21512,.01],[50998,.02],[80490,.04],[111732,.06],[141212,.08],[721318,.093],[865574,.103],[1442628,.113],[Infinity,.123]],
+    niitThresh:250000, ssT1:32000, ssT2:44000
+  },
+  hoh:{
+    fedStd:22500, fedStdAge65:2000, caStd:10726,
+    fedBrackets:[[17000,.10],[64850,.12],[103350,.22],[197300,.24],[250500,.32],[626350,.35],[Infinity,.37]],
+    ltcgBrackets:[[64750,0],[566700,.15],[Infinity,.20]],
+    caBrackets:[[21512,.01],[50998,.02],[80490,.04],[111732,.06],[141212,.08],[721318,.093],[865574,.103],[1442628,.113],[Infinity,.123]],
+    niitThresh:200000, ssT1:25000, ssT2:34000
+  }
+};
+
+const fmt = n => '$' + Math.round(Math.abs(n)).toLocaleString();
+const fmtS = n => (n < 0 ? '-' : '') + fmt(n);
+const fmtPct = n => (n*100).toFixed(1) + '%';
+const v = id => parseFloat(document.getElementById(id).value) || 0;
+const vm = id => v(id) * 12;
+const ck = id => document.getElementById(id).checked;
+const el = id => document.getElementById(id);
+
+function bracketTax(income, brackets) {
+  let tax = 0, prev = 0, detail = [];
+  for (const [top, rate] of brackets) {
+    if (income <= prev) break;
+    const inB = Math.min(income, top === Infinity ? income + 1 : top) - prev;
+    tax += inB * rate;
+    detail.push({ rate, low: prev, high: top, inB, tax: inB * rate });
+    prev = top === Infinity ? income : top;
+    if (top === Infinity) break;
+  }
+  return { tax, detail };
+}
+
+function margRate(income, brackets) {
+  let prev = 0;
+  for (const [top, rate] of brackets) {
+    if (income <= top) return rate;
+    prev = top;
+  }
+  return brackets[brackets.length - 1][1];
+}
+
+function ltcgMargRate(ordIncome, prefIncome, brackets) {
+  const total = ordIncome + prefIncome;
+  return margRate(total, brackets);
+}
+
+function ssTaxable(ss, agi, p) {
+  const combined = agi + ss * 0.5;
+  if (combined <= p.ssT1) return 0;
+  if (combined <= p.ssT2) return Math.min(ss * 0.5, (combined - p.ssT1) * 0.5);
+  const a = Math.min(ss * 0.5, (p.ssT2 - p.ssT1) * 0.5);
+  const b = Math.min(ss * 0.85 - a, (combined - p.ssT2) * 0.85);
+  return Math.min(ss * 0.85, a + b);
+}
+
+function calcAll(inp) {
+  const p = P[inp.status];
+  const age = inp.age;
+  const canAccess = age >= 59.5;
+  // RMD age under SECURE 2.0: born after 1960 → age 75
+  const rmdAge = (2026 - age) <= 1960 ? 73 : 75; // approximate birth year check
+  // More precisely: if current age < 75 and born after 1960
+  const birthYear = 2026 - age;
+  const actualRmdAge = birthYear >= 1960 ? 75 : 73;
+
+  const penFed = canAccess ? 0 : 0.10;
+  const penCA  = canAccess ? 0 : 0.025;
+  const penTotal = penFed + penCA;
+
+  // Incomes
+  const earlyAccts = inp.trad401k + inp.rmdInc; // subject to penalty
+  const ordIncome = inp.wages + inp.trad401k + inp.rmdInc + inp.pension + inp.stcg + inp.otherOrd;
+  const prefIncome = inp.ltcg + inp.qualDiv;
+  const taxFreeIncome = inp.roth + inp.fiveTwentyNine + inp.muniBond + inp.hsa;
+
+  const ssT = ssTaxable(inp.ss, ordIncome + prefIncome, p);
+
+  // ─── FEDERAL ───────────────────────────────────────────────────────────────
+  const fedAGI = ordIncome + prefIncome + ssT;
+
+  let fedStd = p.fedStd;
+  if (inp.age65) fedStd += p.fedStdAge65;
+  if (inp.status === 'mfj' && inp.spouseAge65) fedStd += p.fedStdAge65;
+
+  // Itemized
+  const saltFed = inp.itemize ? Math.min(10000, inp.propTax + inp.stateTax) : 0;
+  const medFed  = inp.itemize ? Math.max(0, inp.medical - fedAGI * 0.075) : 0;
+  const fedItem = inp.itemize ? inp.mortInt + saltFed + inp.charityCash + inp.charityNC + medFed + inp.otherDeduct : 0;
+  const fedDeduct = inp.itemize ? Math.max(fedItem, fedStd) : fedStd;
+
+  const fedTaxOrd  = Math.max(0, ordIncome + ssT - fedDeduct);
+  const fedTaxPref = Math.max(0, prefIncome - Math.max(0, fedDeduct - (ordIncome + ssT)));
+
+  const { tax: fedOrdTax, detail: fedOrdDet } = bracketTax(fedTaxOrd, p.fedBrackets);
+
+  // LTCG tax: stacked on top of ordinary
+  let fedPrefTax = 0, prevT = 0;
+  for (const [top, rate] of p.ltcgBrackets) {
+    if (fedTaxPref <= 0) break;
+    const lo2 = Math.max(prevT, fedTaxOrd);
+    const hi2 = Math.min(top === Infinity ? fedTaxOrd + fedTaxPref + 1 : top, fedTaxOrd + fedTaxPref);
+    if (hi2 > lo2) fedPrefTax += (hi2 - lo2) * rate;
+    prevT = top === Infinity ? fedTaxOrd + fedTaxPref : top;
+    if (top === Infinity) break;
+  }
+
+  // NIIT
+  const niitBase = Math.min(prefIncome, Math.max(0, fedAGI - p.niitThresh));
+  const niit = niitBase * 0.038;
+
+  const earlyPenFedAmt = penFed * earlyAccts;
+  const fedTaxTotal = fedOrdTax + fedPrefTax + niit + earlyPenFedAmt;
+  const fedMarg = margRate(fedTaxOrd, p.fedBrackets);
+  const fedEff  = fedAGI > 0 ? fedTaxTotal / fedAGI : 0;
+
+  // ─── CALIFORNIA ────────────────────────────────────────────────────────────
+  // All cap gains = ordinary; SS exempt
+  const caOrd = inp.wages + inp.trad401k + inp.rmdInc + inp.pension + inp.stcg + inp.otherOrd + inp.ltcg + inp.qualDiv;
+  const caAGI = caOrd;
+
+  const saltCA   = inp.itemize ? inp.propTax : 0; // no SALT cap, property tax only (not state income tax)
+  const medCA    = inp.itemize ? Math.max(0, inp.medical - caAGI * 0.075) : 0;
+  const caItem   = inp.itemize ? inp.mortInt + saltCA + inp.charityCash + inp.charityNC + medCA + inp.otherDeduct : 0;
+  const caDeduct = inp.itemize ? Math.max(caItem, p.caStd) : p.caStd;
+  const caTaxInc = Math.max(0, caAGI - caDeduct);
+
+  const { tax: caOrdTax, detail: caOrdDet } = bracketTax(caTaxInc, p.caBrackets);
+  const caMHST = Math.max(0, caTaxInc - 1000000) * 0.01;
+  const earlyPenCAAmt = penCA * earlyAccts;
+  const caTaxTotal = caOrdTax + caMHST + earlyPenCAAmt;
+  const caMarg = margRate(caTaxInc, p.caBrackets) + (caTaxInc > 1000000 ? 0.01 : 0);
+  const caEff  = caAGI > 0 ? caTaxTotal / caAGI : 0;
+
+  const combinedTax = fedTaxTotal + caTaxTotal;
+  const basisReturn = (inp.ltcgBasis || 0) + (inp.stcgBasis || 0); // tax-free return of capital
+  const grossIncome = ordIncome + prefIncome + inp.ss + taxFreeIncome;
+  const afterTax = grossIncome - combinedTax;
+  const totalCash = afterTax + basisReturn; // full spending power incl. basis returned
+
+  // ─── MARGINAL COMBINED RATES ────────────────────────────────────────────────
+  const combMargOrd  = fedMarg + caMarg;
+  const combMargLTCG = ltcgMargRate(fedTaxOrd, fedTaxPref, p.ltcgBrackets) + caMarg;
+  const combMarg401k = combMargOrd + (canAccess ? 0 : 0.125);
+
+  const grossUpOrd  = combMargOrd  < 1 ? 1 / (1 - combMargOrd)  : 99;
+  const grossUpLTCG = combMargLTCG < 1 ? 1 / (1 - combMargLTCG) : 99;
+  const grossUp401k = combMarg401k < 1 ? 1 / (1 - combMarg401k) : 99;
+
+  return {
+    p, age, canAccess, actualRmdAge, birthYear,
+    penFed, penCA, penTotal, earlyAccts, earlyPenFedAmt, earlyPenCAAmt,
+    ordIncome, prefIncome, taxFreeIncome, ssT,
+    fedAGI, fedStd, fedItem, fedDeduct, fedTaxOrd, fedTaxPref,
+    fedOrdTax, fedPrefTax, niit, fedTaxTotal, fedMarg, fedEff,
+    fedOrdDet, saltFed, medFed, fedItem,
+    caAGI, caOrd, caItem, caDeduct, caTaxInc,
+    caOrdTax, caMHST, caTaxTotal, caMarg, caEff,
+    caOrdDet, saltCA, medCA,
+    combinedTax, grossIncome, afterTax, basisReturn, totalCash,
+    combMargOrd, combMargLTCG, combMarg401k,
+    grossUpOrd, grossUpLTCG, grossUp401k,
+    niitBase
+  };
+}
+
+function getInputs() {
+  return {
+    age: v('age'), status: el('filingStatus').value,
+    age65: ck('age65'), spouseAge65: ck('spouseAge65'),
+    itemize: ck('itemize'),
+    wages: v('wages'), trad401k: v('trad401k'), rmdInc: v('rmd'),
+    pension: v('pension'), otherOrd: v('otherOrd'),
+    stcgProceeds: v('stcgProceeds'), stcgBasis: v('stcgBasis'),
+    stcg: Math.max(0, v('stcgProceeds') - v('stcgBasis')),
+    ltcgProceeds: v('ltcgProceeds'), ltcgBasis: v('ltcgBasis'),
+    ltcg: Math.max(0, v('ltcgProceeds') - v('ltcgBasis')),
+    qualDiv: v('qualDiv'), ss: v('ss'),
+    roth: v('roth'), fiveTwentyNine: v('fiveTwentyNine'),
+    muniBond: v('muniBond'), hsa: v('hsa'),
+    mortInt: v('mortgageInt'), propTax: v('propTax'), stateTax: v('stateTax'),
+    charityCash: v('charityCash'), charityNC: v('charityNonCash'),
+    medical: v('medicalTotal'), otherDeduct: v('otherDeduct'),
+    eMortgage: vm('eMortgage'), ePropTax: vm('ePropTax'),
+    eHOA: vm('eHOA'), eMaint: vm('eMaint'),
+    eCollegeTuition: v('eCollegeTuition'), eCollegeRoom: v('eCollegeRoom'),
+    eFood: vm('eFood'), eUtil: vm('eUtil'), eTransport: vm('eTransport'),
+    eHealth: vm('eHealth'), eClothing: vm('eClothing'), eEntertain: vm('eEntertain'),
+    eTravel: v('eTravel'), eOther: v('eOther')
+  };
+}
+
+function calc() {
+  const inp = getInputs();
+  const r = calcAll(inp);
+
+  // Expenses
+  const expItems = [
+    { label: 'Mortgage P&I', val: inp.eMortgage },
+    { label: 'Property tax', val: inp.ePropTax },
+    { label: 'HOA + Insurance', val: inp.eHOA },
+    { label: 'Maintenance', val: inp.eMaint },
+    { label: "Son's college tuition", val: inp.eCollegeTuition },
+    { label: 'College room & board', val: inp.eCollegeRoom },
+    { label: 'Groceries & dining', val: inp.eFood },
+    { label: 'Utilities', val: inp.eUtil },
+    { label: 'Transportation', val: inp.eTransport },
+    { label: 'Healthcare', val: inp.eHealth },
+    { label: 'Clothing & personal', val: inp.eClothing },
+    { label: 'Entertainment', val: inp.eEntertain },
+    { label: 'Travel', val: inp.eTravel },
+    { label: 'Other', val: inp.eOther },
+  ].filter(e => e.val > 0);
+  const totalExp = expItems.reduce((s, e) => s + e.val, 0);
+  const gap = r.totalCash - totalExp; // uses full proceeds (after-tax income + basis returned)
+
+  // ─── UPDATE MONTHLY LABELS ──────────────────────────────────────────────────
+  const moFields = [
+    ['eMortgage','eMortgageA'],['ePropTax','ePropTaxA'],['eHOA','eHOAA'],['eMaint','eMaintA'],
+    ['eFood','eFoodA'],['eUtil','eUtilA'],['eTransport','eTransportA'],
+    ['eHealth','eHealthA'],['eClothing','eClothingA'],['eEntertain','eEntertainA']
+  ];
+  moFields.forEach(([inId, outId]) => {
+    const annual = v(inId) * 12;
+    el(outId).textContent = '= ' + fmt(annual) + '/yr';
+  });
+
+  // ─── PROFILE / STATUS ───────────────────────────────────────────────────────
+  el('spouseRow').style.display = inp.status === 'mfj' ? '' : 'none';
+  el('itemizeSection').style.display = inp.itemize ? '' : 'none';
+
+  // Age badge + penalty notice
+  if (r.canAccess) {
+    el('acctBadge').textContent = '✅ Accessible (59.5+)';
+    el('acctBadge').className = 'badge b-green';
+    el('penaltyNotice').style.display = 'none';
+  } else {
+    const yrs = (59.5 - inp.age).toFixed(1);
+    el('acctBadge').textContent = `🔒 Locked — ${yrs} yrs until 59.5`;
+    el('acctBadge').className = 'badge b-red';
+    el('penaltyNotice').style.display = '';
+  }
+
+  // ─── DEDUCTION HINTS ────────────────────────────────────────────────────────
+  el('saltFedDisplay').textContent = fmt(r.saltFed);
+  el('saltCADisplay').textContent = fmt(r.saltCA);
+  el('medDeductDisplay').textContent = fmt(Math.max(r.medFed, r.medCA));
+
+  const fedUseItem = inp.itemize && r.fedItem > r.fedStd;
+  el('fedStdBox').className  = 'dc-box ' + (fedUseItem ? 'dc-inactive' : 'dc-active');
+  el('fedItemBox').className = 'dc-box ' + (fedUseItem ? 'dc-active' : 'dc-inactive');
+  el('fedStdAmt').textContent  = fmt(r.fedStd);
+  el('fedItemAmt').textContent = fmt(r.fedItem);
+
+  const caUseItem = inp.itemize && r.caItem > r.p.caStd;
+  el('caStdBox').className  = 'dc-box ' + (caUseItem ? 'dc-inactive' : 'dc-active');
+  el('caItemBox').className = 'dc-box ' + (caUseItem ? 'dc-active' : 'dc-inactive');
+  el('caStdAmt').textContent  = fmt(r.p.caStd);
+  el('caItemAmt').textContent = fmt(r.caItem);
+
+  // ─── TAX SUMMARY CARDS ──────────────────────────────────────────────────────
+  el('fedTotal').textContent = fmt(r.fedTaxTotal);
+  el('fedSub').textContent   = 'on ' + fmt(r.fedTaxOrd + r.fedTaxPref) + ' taxable';
+  el('fedEff').textContent   = fmtPct(r.fedEff);
+  el('fedMarg').textContent  = fmtPct(r.fedMarg);
+
+  el('caTotal').textContent = fmt(r.caTaxTotal);
+  el('caSub').textContent   = 'on ' + fmt(r.caTaxInc) + ' taxable';
+  el('caEff').textContent   = fmtPct(r.caEff);
+  el('caMarg').textContent  = fmtPct(r.caMarg);
+
+  el('combTotal').textContent = fmt(r.combinedTax);
+  el('combSub').textContent   = fmtPct(r.grossIncome > 0 ? r.combinedTax / r.grossIncome : 0) + ' of gross';
+  el('combEff').textContent   = fmtPct(r.grossIncome > 0 ? r.combinedTax / r.grossIncome : 0);
+  el('niitAmt').textContent   = fmt(r.niit);
+  el('penaltyAmt').textContent = fmt(r.earlyPenFedAmt + r.earlyPenCAAmt);
+
+  // ─── GAIN DISPLAY (proceeds - basis) ───────────────────────────────────────
+  const ltcgGain = inp.ltcg; // already computed as max(0, proceeds - basis)
+  const stcgGain = inp.stcg;
+  el('ltcgGainDisplay').textContent = fmt(ltcgGain) + (inp.ltcgBasis > 0 ? ` (${fmt(inp.ltcgProceeds)} − ${fmt(inp.ltcgBasis)})` : '');
+  el('stcgGainDisplay').textContent = fmt(stcgGain) + (inp.stcgBasis > 0 ? ` (${fmt(inp.stcgProceeds)} − ${fmt(inp.stcgBasis)})` : '');
+
+  el('grossIncome').textContent   = fmt(r.grossIncome);
+  el('afterTaxIncome').textContent = fmt(r.totalCash);
+  el('grossUpFactor').textContent  = r.combMargOrd > 0 ? r.grossUpOrd.toFixed(2) + 'x' : '—';
+
+  // ─── EXPENSES ───────────────────────────────────────────────────────────────
+  el('totalExpenses').textContent = fmt(totalExp);
+  el('totalExpensesMo').textContent = '(= ' + fmt(totalExp / 12) + ' / month)';
+
+  // ─── COVERAGE ANALYSIS ──────────────────────────────────────────────────────
+  el('covExpenses').textContent  = fmt(totalExp);
+  el('covFedTax').textContent    = fmt(r.fedTaxTotal);
+  el('covCATax').textContent     = fmt(r.caTaxTotal);
+  el('covPenalty').textContent   = fmt(r.earlyPenFedAmt + r.earlyPenCAAmt);
+  el('covTotalNeed').textContent = fmt(totalExp + r.combinedTax);
+  el('covGross').textContent     = fmt(r.grossIncome);
+  el('covTaxFree').textContent   = fmt(r.taxFreeIncome + r.basisReturn);
+  el('covAfterTax').textContent  = fmt(r.totalCash);
+  el('covExpCovered').textContent = totalExp > 0
+    ? fmt(Math.min(r.totalCash, totalExp)) + ' / ' + fmt(totalExp)
+    : '—';
+  el('covGap').textContent = (gap >= 0 ? '+' : '-') + fmt(Math.abs(gap));
+  el('covGap').style.color = gap >= 0 ? '#16a34a' : '#dc2626';
+
+  const gapBox = el('gapBox');
+  if (totalExp === 0 && r.grossIncome === 0) {
+    gapBox.className = 'gap-box gap-neutral';
+    el('gapTitle').textContent = 'ENTER INCOME AND EXPENSES TO SEE ANALYSIS';
+    el('gapAmount').textContent = '—';
+    el('gapDetail').textContent = '';
+  } else if (gap >= 0) {
+    gapBox.className = 'gap-box gap-surplus';
+    el('gapTitle').textContent = 'ANNUAL SURPLUS';
+    el('gapAmount').textContent = '+' + fmt(gap);
+    el('gapDetail').textContent = `Total cash (after-tax income${r.basisReturn > 0 ? ' + ' + fmt(r.basisReturn) + ' basis returned' : ''}) exceeds expenses by ${fmt(gap)} (${fmt(gap/12)}/month). ✅`;
+  } else {
+    gapBox.className = 'gap-box gap-deficit';
+    el('gapTitle').textContent = 'ANNUAL DEFICIT — ADDITIONAL INCOME NEEDED';
+    el('gapAmount').textContent = '-' + fmt(Math.abs(gap));
+    el('gapDetail').textContent = `You're ${fmt(Math.abs(gap))} short after taxes. See table below for how much gross income you need from each source.`;
+  }
+
+  // Gross-up deficit section
+  const deficit = Math.max(0, totalExp - r.afterTax);
+  el('grossUpSection').style.display = deficit > 0 ? '' : 'none';
+  if (deficit > 0) {
+    const grossUpRows = [
+      { src: 'Wages (ordinary income)', rate: r.combMargOrd, gu: r.grossUpOrd, warn: false },
+      { src: 'Long-Term Capital Gains', rate: r.combMargLTCG, gu: r.grossUpLTCG, warn: false },
+      { src: `401k/IRA${r.canAccess ? '' : ' + 12.5% penalty'}`, rate: r.combMarg401k, gu: r.grossUp401k, warn: !r.canAccess },
+    ];
+    let html = '';
+    for (const row of grossUpRows) {
+      const gross = deficit * row.gu;
+      const extraTax = gross - deficit;
+      html += `<tr>
+        <td>${row.src}${row.warn ? ' <span class="badge b-orange">Penalty applies</span>' : ''}</td>
+        <td>${fmt(deficit)}</td>
+        <td><strong>${fmt(gross)}</strong></td>
+        <td class="neg">${fmt(extraTax)}</td>
+        <td>${fmtPct(row.rate)}</td>
+      </tr>`;
+    }
+    el('grossUpBody').innerHTML = html;
+  }
+
+  // Expense breakdown (only if expenses entered)
+  el('expBreakdownSection').style.display = expItems.length > 0 ? '' : 'none';
+  if (expItems.length > 0) {
+    let html = '';
+    for (const exp of expItems) {
+      const gw   = exp.val * r.grossUpOrd;
+      const gltcg = exp.val * r.grossUpLTCG;
+      const g401k = exp.val * r.grossUp401k;
+      html += `<tr>
+        <td>${exp.label}</td>
+        <td>${fmt(exp.val)}</td>
+        <td>${fmt(gw)}</td>
+        <td>${fmt(gltcg)}</td>
+        <td${!r.canAccess ? ' class="warn"' : ''}>${fmt(g401k)}</td>
+      </tr>`;
+    }
+    // Total row
+    const gw  = totalExp * r.grossUpOrd;
+    const gltcg = totalExp * r.grossUpLTCG;
+    const g401k = totalExp * r.grossUp401k;
+    html += `<tr>
+      <td>TOTAL</td>
+      <td>${fmt(totalExp)}</td>
+      <td>${fmt(gw)}</td>
+      <td>${fmt(gltcg)}</td>
+      <td${!r.canAccess ? ' class="warn"' : ''}>${fmt(g401k)}</td>
+    </tr>`;
+    el('expBreakBody').innerHTML = html;
+  }
+
+  // ─── INCOME BREAKDOWN TABLE ─────────────────────────────────────────────────
+  const incRows = [
+    { label:'Wages / Salary', amt:inp.wages, fTreat:'Ordinary', caTreat:'Ordinary', fBadge:'b-gray', cBadge:'b-gray' },
+    { label:'Traditional 401k / IRA', amt:inp.trad401k, fTreat:'Ordinary', caTreat:'Ordinary', fBadge:'b-gray', cBadge:'b-gray', penalty: r.canAccess ? null : '10%+2.5% pen.' },
+    { label:'RMDs', amt:inp.rmdInc, fTreat:'Ordinary', caTreat:'Ordinary', fBadge:'b-gray', cBadge:'b-gray', penalty: r.canAccess ? null : '10%+2.5% pen.' },
+    { label:'Pension / Annuity', amt:inp.pension, fTreat:'Ordinary', caTreat:'Ordinary', fBadge:'b-gray', cBadge:'b-gray' },
+    { label:`Short-Term Cap. Gains${inp.stcgBasis>0?' ('+fmt(inp.stcgProceeds)+' proceeds − '+fmt(inp.stcgBasis)+' basis)':''}`, amt:inp.stcg, fTreat:'Ordinary', caTreat:'Ordinary', fBadge:'b-gray', cBadge:'b-gray' },
+    { label:`Long-Term Cap. Gains${inp.ltcgBasis>0?' ('+fmt(inp.ltcgProceeds)+' proceeds − '+fmt(inp.ltcgBasis)+' basis)':''}`, amt:inp.ltcg, fTreat:'0/15/20%', caTreat:'Ordinary (!)', fBadge:'b-blue', cBadge:'b-red' },
+    { label:'Qualified Dividends', amt:inp.qualDiv, fTreat:'0/15/20%', caTreat:'Ordinary (!)', fBadge:'b-blue', cBadge:'b-red' },
+    { label:'Social Security', amt:inp.ss, fTreat:`${inp.ss>0?Math.round(r.ssT/inp.ss*100):0}% taxable`, caTreat:'Exempt ✓', fBadge:'b-yellow', cBadge:'b-green' },
+    { label:'Cost Basis Returned (LTCG+STCG)', amt:r.basisReturn, fTreat:'Tax-Free ✓', caTreat:'Tax-Free ✓', fBadge:'b-green', cBadge:'b-green' },
+    { label:'Roth IRA Distributions', amt:inp.roth, fTreat:'Tax-Free ✓', caTreat:'Tax-Free ✓', fBadge:'b-green', cBadge:'b-green' },
+    { label:'529 / Education', amt:inp.fiveTwentyNine, fTreat:'Tax-Free ✓', caTreat:'Tax-Free ✓', fBadge:'b-green', cBadge:'b-green' },
+    { label:'Muni Bond Interest', amt:inp.muniBond, fTreat:'Tax-Free ✓', caTreat:'Tax-Free ✓', fBadge:'b-green', cBadge:'b-green' },
+    { label:'HSA Distributions', amt:inp.hsa, fTreat:'Tax-Free ✓', caTreat:'Tax-Free ✓', fBadge:'b-green', cBadge:'b-green' },
+  ].filter(row => row.amt > 0);
+
+  const fedTaxableTotal = r.fedTaxOrd + r.fedTaxPref;
+  let iHtml = '';
+  for (const row of incRows) {
+    // Rough attribution
+    const frac = row.amt / Math.max(1, r.grossIncome);
+    const fedA  = row.fTreat.includes('Free') || row.fTreat.includes('Exempt') ? 0 : frac * r.fedTaxTotal;
+    const caA   = row.caTreat.includes('Free') || row.caTreat.includes('Exempt') ? 0 : frac * r.caTaxTotal;
+    iHtml += `<tr>
+      <td>${row.label}${row.penalty ? ' <span class="badge b-orange">'+row.penalty+'</span>' : ''}</td>
+      <td>${fmt(row.amt)}</td>
+      <td><span class="badge ${row.fBadge}">${row.fTreat}</span></td>
+      <td><span class="badge ${row.cBadge}">${row.caTreat}</span></td>
+      <td class="${fedA>0?'neg':''}">${fmt(fedA)}</td>
+      <td class="${caA>0?'neg':''}">${fmt(caA)}</td>
+    </tr>`;
+  }
+  if (r.niit > 0) {
+    iHtml += `<tr><td>NIIT (3.8% surtax)</td><td>—</td><td><span class="badge b-red">3.8% Surtax</span></td><td><span class="badge b-green">N/A</span></td><td class="neg">${fmt(r.niit)}</td><td>$0</td></tr>`;
+  }
+  iHtml += `<tr><td><strong>Total</strong></td><td><strong>${fmt(r.grossIncome)}</strong></td><td></td><td></td><td class="neg"><strong>${fmt(r.fedTaxTotal)}</strong></td><td class="neg"><strong>${fmt(r.caTaxTotal)}</strong></td></tr>`;
+  el('incomeBreakBody').innerHTML = iHtml;
+
+  // ─── BRACKET TABLES ─────────────────────────────────────────────────────────
+  let fBracketHtml = '';
+  for (const d of r.fedOrdDet) {
+    if (d.inB <= 0) continue;
+    fBracketHtml += `<tr><td>${(d.rate*100).toFixed(0)}%</td><td>${fmt(d.low)}–${d.high===Infinity?'∞':fmt(d.high)}</td><td>${fmt(d.inB)}</td><td class="neg">${fmt(d.tax)}</td></tr>`;
+  }
+  if (r.fedPrefTax > 0)
+    fBracketHtml += `<tr><td>LTCG</td><td>0–20%</td><td>${fmt(r.fedTaxPref)}</td><td class="neg">${fmt(r.fedPrefTax)}</td></tr>`;
+  if (r.niit > 0)
+    fBracketHtml += `<tr><td>NIIT</td><td>3.8%</td><td>${fmt(r.niitBase)}</td><td class="neg">${fmt(r.niit)}</td></tr>`;
+  if (r.earlyPenFedAmt > 0)
+    fBracketHtml += `<tr><td class="warn">Penalty</td><td class="warn">10%</td><td class="warn">${fmt(r.earlyAccts)}</td><td class="warn">${fmt(r.earlyPenFedAmt)}</td></tr>`;
+  fBracketHtml += `<tr><td colspan="3"><strong>Total Federal</strong></td><td class="neg"><strong>${fmt(r.fedTaxTotal)}</strong></td></tr>`;
+  el('fedBracketBody').innerHTML = fBracketHtml;
+  el('fedDeductNote').textContent = `Using ${r.fedDeduct===r.fedStd?'standard':'itemized'} deduction: ${fmt(r.fedDeduct)} (std: ${fmt(r.fedStd)})`;
+
+  let cBracketHtml = '';
+  for (const d of r.caOrdDet) {
+    if (d.inB <= 0) continue;
+    cBracketHtml += `<tr><td>${(d.rate*100).toFixed(1)}%</td><td>${fmt(d.low)}–${d.high===Infinity?'∞':fmt(d.high)}</td><td>${fmt(d.inB)}</td><td class="neg">${fmt(d.tax)}</td></tr>`;
+  }
+  if (r.caMHST > 0)
+    cBracketHtml += `<tr><td>1%</td><td>MHST &gt;$1M</td><td>${fmt(Math.max(0,r.caTaxInc-1000000))}</td><td class="neg">${fmt(r.caMHST)}</td></tr>`;
+  if (r.earlyPenCAAmt > 0)
+    cBracketHtml += `<tr><td class="warn">Penalty</td><td class="warn">2.5%</td><td class="warn">${fmt(r.earlyAccts)}</td><td class="warn">${fmt(r.earlyPenCAAmt)}</td></tr>`;
+  cBracketHtml += `<tr><td colspan="3"><strong>Total CA</strong></td><td class="neg"><strong>${fmt(r.caTaxTotal)}</strong></td></tr>`;
+  el('caBracketBody').innerHTML = cBracketHtml;
+  el('caDeductNote').textContent = `Using ${r.caDeduct===r.p.caStd?'standard':'itemized'} deduction: ${fmt(r.caDeduct)} (std: ${fmt(r.p.caStd)})`;
+
+  // ─── PLANNING TIMELINE ──────────────────────────────────────────────────────
+  const age = inp.age;
+  const yr59 = 2026 + (59.5 - age);
+  const yrRMD = 2026 + (r.actualRmdAge - age);
+  const maxAge = r.actualRmdAge + 5;
+  const pct = v => Math.max(0, Math.min(100, (v - age) / (maxAge - age) * 100));
+
+  const tlBar = el('tlBar');
+  // Remove old markers
+  tlBar.querySelectorAll('.tl-marker').forEach(m => m.remove());
+  el('tlFill').style.width = pct(age) + '%';
+
+  const addMarker = (leftPct, dotClass, labelLines) => {
+    const m = document.createElement('div');
+    m.className = 'tl-marker';
+    m.style.left = leftPct + '%';
+    m.innerHTML = `<div class="tl-dot ${dotClass}"></div>` + labelLines.map(l => `<div class="tl-label">${l}</div>`).join('');
+    tlBar.appendChild(m);
+  };
+  addMarker(0, 'tl-dot-now', [`Age ${age}`, 'NOW']);
+  addMarker(pct(59.5), 'tl-dot-mid', ['Age 59.5', yr59.toFixed(0), age < 59.5 ? `${(59.5-age).toFixed(1)} yrs` : '✅ Passed']);
+  addMarker(100, 'tl-dot-end', [`Age ${r.actualRmdAge}`, yrRMD.toFixed(0), 'RMDs Start']);
+
+  el('tlDetails').innerHTML = `
+    <div style="border-left:3px solid #4f46e5;padding-left:8px">
+      <strong>Now (Age ${age})</strong><br>
+      <span class="${r.canAccess?'':'b-red badge'}">${r.canAccess ? '✅ All accounts accessible' : '🔒 401k/IRA locked'}</span><br>
+      <span style="font-size:.72rem;color:#666">Available: wages, LTCG, dividends, SS</span>
+    </div>
+    <div style="border-left:3px solid #f59e0b;padding-left:8px">
+      <strong>Age 59.5 (${yr59.toFixed(0)})</strong><br>
+      <span class="badge b-green">✅ 401k & Roth unlocked</span><br>
+      <span style="font-size:.72rem;color:#666">No more early withdrawal penalty</span>
+    </div>
+    <div style="border-left:3px solid #10b981;padding-left:8px">
+      <strong>Age ${r.actualRmdAge} (${yrRMD.toFixed(0)})</strong><br>
+      <span class="badge b-yellow">⚠ RMDs required</span><br>
+      <span style="font-size:.72rem;color:#666">Min. distributions from traditional accounts</span>
+    </div>`;
+}
+
+// Dynamic year labels
+const _yr = new Date().getFullYear();
+document.getElementById('taxYearLabel').textContent = _yr;
+const _fy = document.getElementById('footerYear');
+if (_fy) _fy.textContent = _yr;
+
+// Initial render
+calc();
+
+// Share button helpers
+function shareX() {
+  const url = encodeURIComponent(location.href);
+  const txt = encodeURIComponent('Free California + Federal Tax Calculator — retirement, capital gains, 401k, Roth IRA and more:');
+  window.open('https://twitter.com/intent/tweet?text='+txt+'&url='+url, '_blank');
+}
+function shareLI() {
+  window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href), '_blank');
+}
+function copyLink() {
+  navigator.clipboard.writeText(location.href).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = '🔗 Copy Link'; }, 2000);
+  });
+}
+</script>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="fi">
+
+    <!-- Footer banner ad -->
+    <div style="text-align:center;margin-bottom:20px">
+      <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px;max-width:100%" data-ad-client="ca-pub-5681396352688184" data-ad-slot="3333333333"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- Share buttons -->
+    <div class="share-row">
+      <span>Share this free tool:</span>
+      <a class="sbtn sb-x" onclick="shareX()" href="javascript:void(0)">𝕏 Share on X</a>
+      <a class="sbtn sb-li" onclick="shareLI()" href="javascript:void(0)">in LinkedIn</a>
+      <a class="sbtn sb-copy" onclick="copyLink()" id="copyBtn" href="javascript:void(0)">🔗 Copy Link</a>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      <strong>⚠️ Disclaimer:</strong> This calculator is provided for <strong>informational and educational purposes only</strong> and does not constitute tax, legal, or financial advice. Tax laws change frequently and individual circumstances vary. The calculations are estimates based on current published tax rates and may not reflect all deductions, credits, phase-outs, AMT, or state-specific rules that apply to your situation. <strong>Always consult a qualified CPA, tax attorney, or financial advisor</strong> before making financial decisions. The creators of this tool accept no liability for errors, omissions, or outcomes resulting from use of this calculator.
+    </div>
+
+    <!-- Footer links -->
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <span style="color:#444">·</span>
+      <a href="mailto:contact@taxcalcca.com">Contact</a>
+      <span style="color:#444">·</span>
+      <span style="color:#666">&copy; <span id="footerYear"></span> CA Tax Calculator &mdash; Free tool, no signup required</span>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
