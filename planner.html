@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retirement &amp; Life Planner (Pro) | CA + Federal Tax Timeline</title>
+<meta name="description" content="Model your financial future year by year: life events, jobs, home purchases, retirement, withdrawals and Roth conversions. See real California + federal taxes and net-worth projections, and compare two scenarios side by side.">
+<link rel="canonical" href="https://taxcalcca.com/planner.html">
+<meta property="og:title" content="Retirement &amp; Life Planner — CA + Federal Tax Timeline">
+<meta property="og:description" content="Build a life-event timeline, project taxes and net worth to any future year, and compare two scenarios side by side.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#eef0f4;color:#1a1a2e;font-size:14px}
+a{color:#4f46e5}
+.topnav{background:#1a1a2e;color:#fff;padding:10px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.topnav .brand{font-weight:800;font-size:1rem}
+.topnav .tag{background:#4f46e5;border-radius:6px;padding:2px 8px;font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.topnav a{color:#a5b4fc;text-decoration:none;font-size:.84rem}
+.topnav a:hover{text-decoration:underline}
+.topnav .spacer{flex:1}
+h1{text-align:center;padding:16px 0 2px;font-size:1.35rem}
+.subtitle{text-align:center;color:#777;font-size:.8rem;margin-bottom:12px}
+.wrap{max-width:1500px;margin:0 auto;padding:0 14px 40px}
+.card{background:#fff;border-radius:10px;padding:16px;box-shadow:0 1px 6px rgba(0,0,0,.08);margin-bottom:14px}
+.card h2{font-size:.9rem;font-weight:700;margin-bottom:12px;padding-bottom:7px;border-bottom:2px solid #e8eaed;display:flex;align-items:center;gap:6px}
+.sec{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#999;margin:12px 0 6px}
+.grid{display:grid;gap:14px}
+.cols-main{grid-template-columns:330px 1fr}
+@media(max-width:1050px){.cols-main{grid-template-columns:1fr}}
+.ir{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:8px}
+.ir label{font-size:.8rem;color:#444;flex:1;line-height:1.25}
+.ir input,.ir select{width:120px;padding:4px 7px;border:1px solid #ddd;border-radius:5px;font-size:.82rem;text-align:right;background:#fafafa}
+.ir select{text-align:left}
+.ir input:focus,.ir select:focus{outline:none;border-color:#4f46e5;background:#fff}
+.rentalcard{border:1px solid #e6e8f0;border-radius:8px;padding:8px 10px;margin-bottom:8px;background:#fafbff}
+.rentalhdr{font-weight:700;font-size:.78rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.rentalhdr .x{cursor:pointer;color:#bbb;font-weight:700}
+.rentalhdr .x:hover{color:#dc2626}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
+.row2 .ir{margin-bottom:2px;gap:4px}
+.row2 .ir label{font-size:.74rem}
+.row2 .ir input{width:58px;padding:4px 5px}
+.btn{padding:7px 13px;border-radius:7px;font-size:.8rem;font-weight:600;border:none;cursor:pointer;background:#4f46e5;color:#fff;transition:opacity .15s}
+.btn:hover{opacity:.88}
+.btn.sm{padding:4px 9px;font-size:.74rem}
+.btn.ghost{background:#eef0fb;color:#4f46e5}
+.btn.danger{background:#fee2e2;color:#dc2626}
+.btn.gray{background:#f3f4f6;color:#555}
+/* scenario tabs */
+.scentabs{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
+.scentab{padding:6px 12px;border-radius:8px;font-size:.82rem;font-weight:700;cursor:pointer;border:2px solid transparent;background:#eef2ff;color:#3730a3}
+.scentab.active{border-color:#4f46e5;background:#fff;box-shadow:0 1px 5px rgba(79,70,229,.2)}
+.scentab .cmptag{display:inline-block;color:#fff;font-size:.6rem;font-weight:800;border-radius:4px;padding:0 5px;margin-left:3px;vertical-align:middle}
+.cmpbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;background:#f7f8fc;border:1px solid #eef0f6;border-radius:8px;padding:8px 12px}
+.cmpbar select{padding:5px 9px;border:1px solid #ddd;border-radius:6px;font-size:.82rem;background:#fff;cursor:pointer;max-width:200px}
+/* timeline */
+.tl{position:relative;height:74px;margin:18px 6px 6px;border-top:2px solid #e0e3ea}
+.tl .axislabel{position:absolute;top:-20px;transform:translateX(-50%);font-size:.66rem;color:#999;white-space:nowrap}
+.tl .lane-label{position:absolute;left:0;font-size:.66rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.05em}
+.chip{position:absolute;transform:translateX(-50%);background:#4f46e5;color:#fff;border-radius:6px;padding:2px 7px;font-size:.7rem;white-space:nowrap;cursor:grab;box-shadow:0 1px 4px rgba(0,0,0,.18);user-select:none;display:flex;align-items:center;gap:4px;border:1px solid rgba(255,255,255,.3)}
+.chip:active{cursor:grabbing}
+.chip.A{background:#4f46e5}
+.chip.B{background:#ea7317}
+.chip.disabled{opacity:.4;text-decoration:line-through}
+.chip .stem{position:absolute;left:50%;width:1px;background:#bbb}
+.scrubline{position:absolute;top:-12px;bottom:-200px;width:2px;background:#10b981;cursor:ew-resize;z-index:5}
+.scrubline::after{content:'';position:absolute;top:-6px;left:-5px;width:12px;height:12px;border-radius:50%;background:#10b981;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.scrubbadge{position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:#10b981;color:#fff;font-size:.68rem;font-weight:700;border-radius:5px;padding:1px 7px;white-space:nowrap}
+/* chart */
+.chartwrap{position:relative}
+svg.chart{width:100%;height:300px;display:block}
+.legend{display:flex;gap:16px;font-size:.76rem;margin-top:4px;flex-wrap:wrap}
+.legend .k{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+/* state panel */
+.statecols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.statecols{grid-template-columns:1fr}}
+.statebox{border-radius:9px;padding:14px;border:1px solid #e5e7eb}
+.statebox.A{border-color:#c7d2fe;background:#f5f7ff}
+.statebox.B{border-color:#fed7aa;background:#fff8f1}
+.statebox h3{font-size:.82rem;font-weight:800;margin-bottom:3px}
+.statebox .nw{font-size:1.5rem;font-weight:800;margin-bottom:8px}
+.srow{display:flex;justify-content:space-between;font-size:.79rem;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.srow.tot{font-weight:700;border-bottom:none;border-top:1px solid rgba(0,0,0,.12);margin-top:3px;padding-top:5px}
+.neg{color:#b91c1c}.pos{color:#15803d}
+.err{background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;border-radius:6px;padding:7px 10px;font-size:.76rem;margin-top:8px;font-weight:600}
+.ok{background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:6px;padding:7px 10px;font-size:.76rem;margin-top:8px;font-weight:600}
+/* palette */
+.palette{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.ptag{font-size:.74rem;padding:5px 10px;border-radius:18px;background:#eef0fb;color:#4f46e5;cursor:pointer;border:1px solid #dde1f5;font-weight:600}
+.ptag:hover{background:#4f46e5;color:#fff}
+.evlist{margin-top:4px}
+.evrow{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;background:#fafbff;border:1px solid #eef0f6;margin-bottom:5px;font-size:.8rem}
+.evrow .age{font-weight:800;color:#4f46e5;min-width:58px}
+.evrow .lbl{flex:1}
+.evrow .x{cursor:pointer;color:#bbb;font-weight:700}
+.evrow .x:hover{color:#dc2626}
+.evrow.off{opacity:.45}
+/* modal */
+.modal-bg{position:fixed;inset:0;background:rgba(20,20,40,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:14px}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:12px;padding:20px;width:420px;max-width:100%;max-height:90vh;overflow:auto;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.modal h3{font-size:1rem;margin-bottom:12px}
+.modal .ir input,.modal .ir select{width:150px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.note{font-size:.72rem;color:#888;font-style:italic}
+.warnbar{background:#fffbeb;border:1px solid #fde68a;border-radius:7px;padding:9px 12px;font-size:.76rem;color:#92400e;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="topnav">
+  <span class="brand">taxcalcca</span><span class="tag">Pro Planner</span>
+  <a href="index.html">← Tax Calculator</a>
+  <span class="spacer"></span>
+  <button class="btn ghost sm" onclick="resetDemo()">Reset to demo</button>
+</div>
+
+<h1>Retirement &amp; Life Planner</h1>
+<p class="subtitle">Build a life-event timeline · project real CA + federal taxes and net worth to any future year · compare two scenarios</p>
+
+<div class="wrap">
+  <div class="warnbar">⚠️ Educational projection, not financial advice. Uses 2025 tax brackets held flat in future years. Wages are nominal (model raises as events); living expenses inflate automatically.</div>
+
+  <div class="grid cols-main">
+    <!-- ════════ LEFT: GLOBAL SETUP ════════ -->
+    <div>
+      <div class="card">
+        <h2>👤 Starting Point (shared by both scenarios)</h2>
+        <div class="ir"><label>Your current age</label><input type="number" id="g_age" min="18" max="90"></div>
+        <div class="ir"><label>Filing status</label>
+          <select id="g_status"><option value="single">Single</option><option value="mfj">Married (MFJ)</option><option value="hoh">Head of Household</option></select>
+        </div>
+        <div class="ir"><label>Project until age</label><input type="number" id="g_horizon" min="60" max="105"></div>
+
+        <div class="sec">Starting balances ($)</div>
+        <div class="ir"><label>Taxable brokerage</label><input type="number" id="g_taxable"></div>
+        <div class="ir"><label>↳ of which cost basis</label><input type="number" id="g_taxableBasis"></div>
+        <div class="ir"><label>Traditional 401k / IRA</label><input type="number" id="g_trad"></div>
+        <div class="ir"><label>Roth</label><input type="number" id="g_roth"></div>
+        <div class="ir"><label>Cash / savings</label><input type="number" id="g_cash"></div>
+        <div class="ir"><label>HSA</label><input type="number" id="g_hsa"></div>
+
+        <div class="sec">Current home you own (set value to 0 if none)</div>
+        <div class="ir"><label>Home value today</label><input type="number" id="g_homeValue"></div>
+        <div class="ir"><label>Mortgage balance left</label><input type="number" id="g_homeBal"></div>
+        <div class="ir"><label>Mortgage rate (%)</label><input type="number" id="g_homeRate" step="0.1"></div>
+        <div class="ir"><label>Years left on mortgage</label><input type="number" id="g_homeTerm"></div>
+        <div class="ir"><label>Property tax (%/yr)</label><input type="number" id="g_homePropTax" step="0.1"></div>
+        <div class="ir"><label>Insurance + HOA ($/yr)</label><input type="number" id="g_homeInsure"></div>
+        <div class="ir"><label>Maintenance ($/yr)</label><input type="number" id="g_homeMaint"></div>
+        <p class="note">Equity (value − balance) counts toward net worth now. Future appreciation grows at the real-estate rate. A "Sell the house" event later frees the equity as cash (primary-residence gain exclusion applied).</p>
+
+        <div class="sec">Rental properties you own (income-producing)</div>
+        <div id="rentalList"></div>
+        <button class="btn ghost sm" onclick="addRental()">＋ Add rental property</button>
+        <p class="note">Each property's equity counts toward net worth and appreciates. Taxable net rent = rent − mortgage interest − property tax − insurance − maintenance − <b>depreciation</b> (building basis ÷ 27.5 yrs); the cash flow (rent − full mortgage payment − costs) feeds your spending. Sell one later with the “Sell a rental property” event (gain incl. depreciation recapture, approximated as long-term capital gain). Passive-loss limits aren't modeled.</p>
+
+        <div class="sec">Baseline income &amp; spending ($/yr, today's dollars)</div>
+        <div class="ir"><label>Wages / salary</label><input type="number" id="g_wages"></div>
+        <div class="ir"><label>Social Security (full)</label><input type="number" id="g_ss"></div>
+        <div class="ir"><label>↳ SS starts at age</label><input type="number" id="g_ssAge" min="62" max="70"></div>
+        <div class="ir"><label>Living expenses</label><input type="number" id="g_spending"></div>
+
+        <div class="sec">Annual growth / inflation (%)</div>
+        <div class="row2">
+          <div class="ir"><label>Stocks</label><input type="number" id="gr_taxable" step="0.1"></div>
+          <div class="ir"><label>401k/IRA</label><input type="number" id="gr_trad" step="0.1"></div>
+          <div class="ir"><label>Roth</label><input type="number" id="gr_roth" step="0.1"></div>
+          <div class="ir"><label>Cash</label><input type="number" id="gr_cash" step="0.1"></div>
+          <div class="ir"><label>Real estate</label><input type="number" id="gr_re" step="0.1"></div>
+          <div class="ir"><label>Inflation</label><input type="number" id="gr_infl" step="0.1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ RIGHT: TIMELINE + EVENTS ════════ -->
+    <div>
+      <div class="card">
+        <div class="sec" style="margin-top:0">Timelines — click one to edit it</div>
+        <div class="scentabs" id="scenBar"></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+          <button class="btn sm" onclick="newScenario()">＋ New timeline</button>
+          <button class="btn ghost sm" onclick="dupScenario()">⧉ Duplicate</button>
+          <button class="btn ghost sm" onclick="renameScenario()">✏️ Rename</button>
+          <button class="btn danger sm" onclick="delScenario()">🗑 Delete</button>
+        </div>
+        <div class="cmpbar">
+          <span style="font-weight:700;font-size:.78rem">📊 Compare:</span>
+          <select id="cmpL" onchange="setCompare(0,this.value)"></select>
+          <span style="color:#888">vs</span>
+          <select id="cmpR" onchange="setCompare(1,this.value)"></select>
+        </div>
+
+        <h2 style="margin-top:6px">➕ Add a Life Event to “<span id="addingTo">A</span>”</h2>
+        <p class="note" style="margin:-4px 0 8px">Click any button to place it on the timeline. Then drag it to the right age, or click it to edit.</p>
+        <div class="palette" id="palette"></div>
+
+        <h2 style="margin-top:14px">📅 Timeline</h2>
+        <div class="tl" id="timeline"></div>
+        <p class="note">Drag a chip to re-time an event. Drag the green scrubber (or click the chart) to inspect any year.</p>
+
+        <div class="sec">Events in <b id="evScenName">A</b> <span style="font-weight:400;text-transform:none;letter-spacing:0">— ⧉ duplicate · ★ save as template · ✏️ edit · 👁 hide · ✕ delete</span></div>
+        <div class="evlist" id="evlist"></div>
+
+        <div class="sec" style="margin-top:14px">🧩 Reusable Event Templates</div>
+        <p class="note" style="margin:-2px 0 6px">Save any event as a template (★), then drop a copy into whichever timeline is active — tweak its params on the way in.</p>
+        <div class="evlist" id="liblist"></div>
+      </div>
+
+      <div class="card">
+        <h2>📈 Net Worth Projection</h2>
+        <div class="chartwrap">
+          <svg class="chart" id="chart" viewBox="0 0 1000 300" preserveAspectRatio="none"></svg>
+        </div>
+        <div class="legend">
+          <span><span class="k" style="background:#4f46e5"></span><span id="leg_A">Scenario A</span></span>
+          <span><span class="k" style="background:#ea7317"></span><span id="leg_B">Scenario B</span></span>
+          <span><span class="k" style="background:#dc2626"></span>Shortfall year (red dot)</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🔍 State at Age <span id="scrubAgeLabel"></span> <span style="font-weight:400;color:#888;font-size:.8rem">(year <span id="scrubYearLabel"></span>)</span></h2>
+        <div class="statecols" id="statecols"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EVENT MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3 id="modalTitle">Event</h3>
+    <div id="modalFields"></div>
+    <div class="modal-actions">
+      <button class="btn danger sm" id="modalDelete" onclick="deleteEvent()" style="margin-right:auto">Delete</button>
+      <button class="btn gray sm" onclick="closeModal()">Cancel</button>
+      <button class="btn sm" onclick="saveEvent()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- App: pure engine/event/tax modules + UI. Requires serving over HTTP
+     (ES modules do not load over file://). Run:  npm run serve  -->
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

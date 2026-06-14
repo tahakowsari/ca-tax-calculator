@@ -1,0 +1,11 @@
+{
+  "name": "ca-tax-planner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "California + Federal tax calculator and retirement/life planner (static site).",
+  "scripts": {
+    "test": "node --test",
+    "serve": "python3 -m http.server 8000"
+  }
+}
