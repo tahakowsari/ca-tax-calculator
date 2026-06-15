@@ -133,6 +133,14 @@ tbody tr:hover{background:#f7f8fd}
 .footer-links a:hover{text-decoration:underline}
 .ad-rect{text-align:center;padding:10px 0;margin:6px 0}
 @media(max-width:700px){.share-row{flex-direction:column;align-items:flex-start}}
+/* written content (publisher content for AdSense + SEO) */
+.homecontent{max-width:820px;margin:18px auto 0;background:#fff;border-radius:10px;box-shadow:0 1px 6px rgba(0,0,0,.08);padding:20px 22px;color:#2b2f45;line-height:1.7;font-size:.92rem}
+.homecontent h2{font-size:1.15rem;margin:22px 0 8px;color:#1a1a2e}
+.homecontent h2:first-child{margin-top:0}
+.homecontent h3{font-size:.97rem;margin:16px 0 5px;color:#2d3152}
+.homecontent p{margin:8px 0}
+.homecontent ul{margin:8px 0 8px 22px}.homecontent li{margin:4px 0}
+.homecontent .faq dt{font-weight:700;margin-top:12px}.homecontent .faq dd{margin:3px 0 0;color:#444}
 </style>
 </head>
 <body>
@@ -444,6 +452,47 @@ tbody tr:hover{background:#f7f8fd}
 
 </div><!-- end right -->
 </div><!-- end layout -->
+
+<!-- ═══════════ WRITTEN CONTENT (publisher content for AdSense + SEO) ═══════════ -->
+<article class="homecontent">
+  <h2>About this California + federal tax calculator</h2>
+  <p>This free calculator estimates your combined <strong>California state and federal income tax</strong> for the 2025 tax year. Unlike a simple bracket lookup, it handles the income types that actually drive a real tax bill in California — wages, long- and short-term capital gains, qualified dividends, pensions, Social Security, traditional 401(k)/IRA withdrawals, Roth distributions, and more — and shows how each is taxed differently at the federal and state levels. It also compares the standard deduction against itemizing, applies the Net Investment Income Tax and early-withdrawal penalties where relevant, and tells you whether your after-tax income covers your living expenses.</p>
+
+  <h2>How to use it</h2>
+  <ul>
+    <li><strong>Pick your profile</strong> — age, filing status (single, married filing jointly, or head of household), and whether you're 65 or older.</li>
+    <li><strong>Enter your income sources</strong> in the relevant boxes. Capital gains use sale proceeds and cost basis, so only the gain is taxed while your basis is returned tax-free.</li>
+    <li><strong>Choose standard or itemized deductions</strong> — the calculator shows both and uses whichever helps you more, separately for federal and California (their rules differ).</li>
+    <li><strong>Add your expenses</strong> to see a coverage analysis: whether your after-tax cash actually covers what you spend, and how much gross income each source needs to net a target amount.</li>
+  </ul>
+
+  <h2>What it calculates</h2>
+  <ul>
+    <li><strong>Federal income tax</strong> across the 2025 brackets, with long-term capital gains and qualified dividends “stacked” on top of ordinary income at the correct 0%/15%/20% rates.</li>
+    <li><strong>California income tax</strong> using the 2025 state brackets — note that California taxes <em>all</em> capital gains as ordinary income (no preferential rate) and adds the 1% Mental Health Services Tax above $1 million.</li>
+    <li><strong>Social Security taxation</strong> — up to 85% may be federally taxable depending on your other income, while California exempts Social Security entirely.</li>
+    <li><strong>Net Investment Income Tax</strong> (3.8% above the threshold) and the <strong>10% federal + 2.5% California early-withdrawal penalty</strong> on retirement accounts before age 59½.</li>
+    <li><strong>Effective and marginal rates</strong>, plus a gross-up showing the pre-tax income needed to hit a take-home goal.</li>
+  </ul>
+
+  <h2>California vs. federal: the big differences</h2>
+  <p>California is one of the highest-tax states, and several of its rules diverge sharply from federal law. There is <strong>no preferential capital-gains rate</strong> — a long-term gain that's taxed at 15% federally can be taxed at 9.3% or more by California as ordinary income. California <strong>exempts Social Security</strong> benefits but has <strong>no SALT cap</strong> for its own return (while the federal deduction for state and local taxes is capped at $10,000). These differences are exactly why looking at federal tax alone understates the true cost of living on investment or retirement income in California.</p>
+
+  <h2>Planning beyond a single year</h2>
+  <p>A one-year snapshot is a great start, but big decisions — when to retire, when to do Roth conversions, when to sell appreciated stock or a rental — play out over decades. Our <a href="planner.html"><strong>Retirement &amp; Life Planner</strong></a> uses this same tax engine to project your taxes and net worth year by year across a timeline of life events, so you can compare scenarios side by side.</p>
+
+  <h2>Frequently asked questions</h2>
+  <dl class="faq">
+    <dt>Is this an exact tax filing?</dt>
+    <dd>No — it's an educational estimate using 2025 brackets and common rules. It doesn't replace tax software or a CPA, and it omits some credits and edge cases.</dd>
+    <dt>Is my data sent anywhere?</dt>
+    <dd>No. The calculator runs entirely in your browser; nothing you type is uploaded.</dd>
+    <dt>Why is my California tax higher than I expected on capital gains?</dt>
+    <dd>California taxes capital gains as ordinary income — there's no 0/15/20% break like the federal return — so investment income is taxed at your full state rate.</dd>
+    <dt>Does it handle married filing jointly and head of household?</dt>
+    <dd>Yes — choose your filing status in the profile section and all brackets, deductions, and thresholds update accordingly.</dd>
+  </dl>
+</article>
 
 <script>
 // ─── 2025 TAX PARAMETERS ────────────────────────────────────────────────────
