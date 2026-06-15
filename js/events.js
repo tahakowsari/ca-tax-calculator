@@ -17,10 +17,10 @@ export const EVENTS = {
     apply:(w,p)=>{ w.flows.wages = +p.amount||0; } },
 
   job_loss: { icon:'📉', label:'Job loss', fields:[],
-    apply:(w)=>{ w.flows.wages = 0; w.flows.contribTrad = 0; w.flows.contribRoth = 0; } },
+    apply:(w)=>{ w.flows.wages = 0; w.flows.contribTrad = 0; w.flows.contribRoth = 0; w.flows.contribTaxable = 0; } },
 
   retire: { icon:'🏖️', label:'Retire (stop wages)', fields:[],
-    apply:(w)=>{ w.flows.wages = 0; w.flows.contribTrad = 0; w.flows.contribRoth = 0; } },
+    apply:(w)=>{ w.flows.wages = 0; w.flows.contribTrad = 0; w.flows.contribRoth = 0; w.flows.contribTaxable = 0; } },
 
   ss_start: { icon:'🏛️', label:'Start Social Security', fields:[['amount','Annual benefit ($)',40000]],
     apply:(w,p)=>{ w.flows.ss = +p.amount||0; w.flows.ssActive = true; } },
@@ -31,8 +31,11 @@ export const EVENTS = {
   spending: { icon:'🛒', label:'Change spending level', fields:[['amount','Annual living expenses ($)',90000]],
     apply:(w,p)=>{ w.flows.spending = +p.amount||0; } },
 
-  contribute: { icon:'💵', label:'Set yearly contribution', fields:[['account','Account|trad,roth',''],['amount','Amount ($/yr)',23000]],
-    apply:(w,p)=>{ if(p.account==='trad') w.flows.contribTrad = +p.amount||0; else w.flows.contribRoth = +p.amount||0; } },
+  contribute: { icon:'💵', label:'Set yearly contribution / investing', fields:[['account','Account|trad,roth,taxable',''],['amount','Amount ($/yr)',23000]],
+    apply:(w,p)=>{ const a = +p.amount||0;
+      if(p.account==='trad') w.flows.contribTrad = a;
+      else if(p.account==='taxable') w.flows.contribTaxable = a;
+      else w.flows.contribRoth = a; } },
 
   withdraw: { icon:'🏧', label:'Set yearly withdrawal', fields:[['account','Account|taxable,trad,roth',''],['amount','Amount ($/yr)',60000]],
     apply:(w,p)=>{ if(p.account==='trad') w.flows.wdTrad = +p.amount||0;
@@ -102,7 +105,7 @@ export function describe(ev){
     case 'ss_start': return 'Social Security '+fmt(p.amount)+'/yr';
     case 'pension_start': return 'Pension '+fmt(p.amount)+'/yr';
     case 'spending': return 'Spending → '+fmt(p.amount)+'/yr';
-    case 'contribute': return 'Contribute '+fmt(p.amount)+'/yr to '+(p.account==='trad'?'401k/IRA':'Roth');
+    case 'contribute': return 'Contribute '+fmt(p.amount)+'/yr to '+({trad:'401k/IRA',roth:'Roth',taxable:'brokerage'}[p.account]||p.account);
     case 'withdraw': return 'Withdraw '+fmt(p.amount)+'/yr from '+({taxable:'brokerage',trad:'401k/IRA',roth:'Roth'}[p.account]||p.account);
     case 'roth_convert': return 'Convert '+fmt(p.amount)+'/yr to Roth';
     case 'college': return 'College '+fmt(p.annual)+'/yr × '+p.years;

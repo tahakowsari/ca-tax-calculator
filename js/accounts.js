@@ -26,6 +26,8 @@ export class TaxableAccount extends Account {
     this.basis = Math.max(0, this.basis - basisBack);
     return { amount: a, gain, basisBack };
   }
+  // Invest post-tax cash: adds to balance and (dollar-for-dollar) to basis.
+  invest(amount){ this.balance += amount; this.basis += amount; }
   // basis does not grow with the market
   grow(){ this.balance *= (1 + this.rate / 100); }
 }

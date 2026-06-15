@@ -28,7 +28,7 @@ export function simulate(state, scenarioId, now = new Date().getFullYear()){
   // recurring "rate" config mutated by events
   const flows = {
     wages:g.wages, pension:0, ss:g.ss, ssActive:false, spending:g.spending,
-    contribTrad:0, contribRoth:0, wdTrad:0, wdRoth:0, wdTaxable:0, rothConvert:0,
+    contribTrad:0, contribRoth:0, contribTaxable:0, wdTrad:0, wdRoth:0, wdTaxable:0, rothConvert:0,
     college:null, stateTaxOn:true,
   };
   // the mutable world events operate on
@@ -46,14 +46,14 @@ export function simulate(state, scenarioId, now = new Date().getFullYear()){
 
     // apply events in month order; pro-rate continuous "rate" flows across the year
     const yearEvents = events.filter(e=>e.age===age).sort((a,b)=>((a.month||1)-(b.month||1)));
-    let ei=0, aWages=0,aPension=0,aSS=0,aSpend=0,aContribT=0,aContribR=0,aWdTrad=0,aWdRoth=0,aWdTaxable=0,aConvert=0,aCollege=0;
+    let ei=0, aWages=0,aPension=0,aSS=0,aSpend=0,aContribT=0,aContribR=0,aContribTax=0,aWdTrad=0,aWdRoth=0,aWdTaxable=0,aConvert=0,aCollege=0;
     for(let m=1;m<=12;m++){
       while(ei<yearEvents.length && Math.max(1,Math.min(12,yearEvents[ei].month||1))===m){ applyEvent(yearEvents[ei], world); ei++; }
       const fr=1/12;
       aWages    += flows.wages*fr;        aPension += flows.pension*fr;
       aSS       += ((flows.ssActive||age>=g.ssAge)?flows.ss:0)*fr;
       aSpend    += flows.spending*inflF*fr;
-      aContribT += flows.contribTrad*fr;  aContribR += flows.contribRoth*fr;
+      aContribT += flows.contribTrad*fr;  aContribR += flows.contribRoth*fr;  aContribTax += flows.contribTaxable*fr;
       aWdTrad   += flows.wdTrad*fr;        aWdRoth  += flows.wdRoth*fr;  aWdTaxable += flows.wdTaxable*fr;
       aConvert  += flows.rothConvert*fr;
       if(flows.college && age>=flows.college.startAge && age<flows.college.startAge+flows.college.years) aCollege += flows.college.annual*inflF*fr;
@@ -68,6 +68,7 @@ export function simulate(state, scenarioId, now = new Date().getFullYear()){
     const ssThisYear = aSS;
     const contribTrad = Math.min(aContribT, Math.max(0,aWages));
     const contribRoth = aContribR;
+    const contribTaxable = aContribTax;
     const taxableWages = Math.max(0, aWages - contribTrad);
 
     const wdTaxable = Math.min(aWdTaxable, Math.max(0, acct.taxable.balance));
@@ -113,12 +114,13 @@ export function simulate(state, scenarioId, now = new Date().getFullYear()){
     // cash flow
     const spendableInflow = taxableWages + aPension + ssThisYear + wdTrad + rmd + wdRoth + wdTaxable + rentalCash + one.taxFree;
     const netCashIncome = spendableInflow + one.ordIncome - tax;
-    const cashFlow = netCashIncome - expenses - contribRoth;
+    const cashFlow = netCashIncome - expenses - contribRoth - contribTaxable;
 
     // apply balance flows (withdrawals/contributions/conversion), then growth
     acct.trad.withdraw(wdTrad); acct.trad.withdraw(rmd); acct.trad.withdraw(convert); acct.trad.contribute(contribTrad);
     acct.roth.withdraw(wdRoth); acct.roth.contribute(convert); acct.roth.contribute(contribRoth);
     acct.taxable.sell(wdTaxable);   // identical gain/basis math; already reflected in tax above
+    acct.taxable.invest(contribTaxable);   // post-tax investing: adds to balance + basis
     cash += cashFlow;
 
     if(ownsHome){ world.home.amortizeYear(); world.home.appreciate(gr.re); }

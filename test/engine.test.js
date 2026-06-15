@@ -85,6 +85,21 @@ test('engine: mid-year job loss still taxes the wages earned before it', () => {
   assert.ok(mk(7).caTax > 0, 'CA tax should be > 0 on pre-loss wages');
 });
 
+test('engine: can invest into and withdraw from the taxable brokerage', () => {
+  // Invest $30k/yr into brokerage from age 50 → balance & basis rise vs baseline.
+  const invest = simulate(withEvents([{id:'i', type:'contribute', age:50, p:{account:'taxable', amount:30000}, on:true}],
+    {wages:200000}), 'A', NOW);
+  const base = simulate(demoState({wages:200000}), 'A', NOW);
+  assert.ok(invest[55].bal.taxable > base[55].bal.taxable + 100000, 'investing should grow the brokerage balance');
+  assert.ok(invest[55].bal.basis  > base[55].bal.basis  + 100000, 'post-tax investing adds to basis');
+
+  // Withdraw $40k/yr from brokerage from age 60 → balance falls vs baseline.
+  const wd = simulate(withEvents([{id:'w', type:'withdraw', age:60, p:{account:'taxable', amount:40000}, on:true}],
+    {wages:120000, spending:110000}), 'A', NOW);
+  const base2 = simulate(demoState({wages:120000, spending:110000}), 'A', NOW);
+  assert.ok(wd[65].bal.taxable < base2[65].bal.taxable, 'withdrawing should shrink the brokerage balance');
+});
+
 test('engine: a rental adds equity and taxable net rent', () => {
   const s = demoState({ rentals:[{value:700000,balance:300000,rate:5,term:25,rent:3500,esc:3,
     propTaxPct:1.1,insure:1500,maint:3000,costBasis:600000,landPct:20,yearsOwned:5}] });
