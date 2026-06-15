@@ -113,6 +113,16 @@ svg.chart{width:100%;height:300px;display:block}
 .ad-strip{text-align:center;padding:8px;overflow:hidden;min-height:0}
 .ad-foot{max-width:1500px;margin:0 auto;padding:6px 14px}
 .ad-label{font-size:.6rem;color:#bbb;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+/* written content (gives the page real publisher content + SEO) */
+.content{max-width:820px;margin:18px auto 0;padding:0 16px;color:#2b2f45;line-height:1.7;font-size:.93rem}
+.content h2{font-size:1.15rem;margin:26px 0 8px;color:#1a1a2e}
+.content h3{font-size:.98rem;margin:18px 0 5px;color:#2d3152}
+.content p{margin:8px 0}
+.content ul,.content ol{margin:8px 0 8px 22px}
+.content li{margin:4px 0}
+.content .faq{margin-top:6px}
+.content .faq dt{font-weight:700;margin-top:12px}
+.content .faq dd{margin:3px 0 0;color:#444}
 .planner-footer{background:#1a1a2e;color:#9ca3af;padding:24px 16px;margin-top:8px;font-size:.78rem;line-height:1.7;text-align:center}
 .planner-footer a{color:#a5b4fc;text-decoration:none}.planner-footer a:hover{text-decoration:underline}
 .planner-footer .disc{max-width:900px;margin:0 auto 10px;border:1px solid #2d3152;border-radius:8px;padding:10px 14px}
@@ -128,12 +138,6 @@ svg.chart{width:100%;height:300px;display:block}
 
 <h1>Retirement &amp; Life Planner</h1>
 <p class="subtitle">Build a life-event timeline · project real CA + federal taxes and net worth to any future year · compare two scenarios</p>
-
-<!-- TOP LEADERBOARD AD (AdSense unit: "Planner top") -->
-<div class="ad-strip">
-  <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px;max-width:100%" data-ad-client="ca-pub-5681396352688184" data-ad-slot="7640222414"></ins>
-  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-</div>
 
 <div class="wrap">
   <div class="warnbar">⚠️ Educational projection, not financial advice. Uses 2025 tax brackets held flat in future years. Wages are nominal (model raises as events); living expenses inflate automatically.</div>
@@ -243,6 +247,64 @@ svg.chart{width:100%;height:300px;display:block}
     </div>
   </div>
 </div>
+
+<!-- ═══════════ WRITTEN CONTENT (publisher content for AdSense + SEO) ═══════════ -->
+<article class="content">
+  <h2>About the Retirement &amp; Life Planner</h2>
+  <p>This free planner projects your finances <strong>year by year</strong> from today to any age you choose, applying real <strong>California and federal taxes</strong> to every year along the way. Instead of a single snapshot, you build a timeline of life events — changing jobs, retiring, buying or selling a home, collecting rent, converting to Roth, taking withdrawals — and watch how your taxes and net worth evolve. You can build two or more timelines and compare them side by side to answer questions like <em>“Can I retire at 58?”</em> or <em>“Should I do Roth conversions before Social Security starts?”</em></p>
+
+  <h2>How to use it</h2>
+  <ol>
+    <li><strong>Set your starting point</strong> (left panel): your age, filing status, current account balances (taxable brokerage, traditional 401(k)/IRA, Roth, HSA, cash), any home or rental properties you own, baseline income and spending, and growth/inflation assumptions.</li>
+    <li><strong>Add life events</strong> to a timeline by clicking a button in the palette — salary changes, retirement, Social Security, home purchases, rentals, withdrawals, Roth conversions, margin loans, and more. Drag a chip to re-time it, or set the exact <strong>month</strong> in the editor.</li>
+    <li><strong>Create more timelines</strong> and pick two with the <em>Compare</em> selector to see them overlaid on the net-worth chart.</li>
+    <li><strong>Scrub through time</strong> with the green slider (or click the chart) to inspect any single year: balances, income by source, federal and California tax, and your cash flow.</li>
+    <li><strong>Watch for red years</strong> — when your accessible cash runs short, that year is flagged so you can add a sale or withdrawal to cover it.</li>
+  </ol>
+
+  <!-- IN-CONTENT AD (AdSense unit: "Planner top") -->
+  <div class="ad-strip" style="margin:18px 0">
+    <div class="ad-label">Advertisement</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5681396352688184" data-ad-slot="7640222414" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </div>
+
+  <h2>What the planner models</h2>
+  <p>Each simulated year aggregates your income and runs it through the same tax engine that powers our <a href="index.html">California + federal tax calculator</a>:</p>
+  <ul>
+    <li><strong>Income &amp; jobs:</strong> wages with raises, job loss, pensions, and Social Security (with the federal taxability formula — and California’s exemption of Social Security).</li>
+    <li><strong>Accounts:</strong> taxable brokerage (with cost-basis tracking so only gains are taxed), pre-tax traditional 401(k)/IRA, Roth, and HSA — each growing at the rate you set.</li>
+    <li><strong>Withdrawals, contributions &amp; Roth conversions,</strong> plus <strong>Required Minimum Distributions</strong> (RMDs) that kick in automatically using the IRS Uniform Lifetime Table.</li>
+    <li><strong>Real estate:</strong> buying and selling a primary home (with the §121 capital-gains exclusion), rental properties with mortgage amortization, appreciation, straight-line <strong>depreciation</strong>, and depreciation recapture on sale, plus converting a home to a rental and back.</li>
+    <li><strong>Margin loans:</strong> borrow against your brokerage for tax-free cash (it’s debt, not a sale), with interest that accrues and is deducted as investment-interest expense.</li>
+    <li><strong>Capital gains</strong> stacked correctly on top of ordinary income, the 3.8% Net Investment Income Tax, and early-withdrawal penalties before age 59½.</li>
+  </ul>
+
+  <h2>Key concepts</h2>
+  <h3>Traditional vs. Roth vs. taxable</h3>
+  <p>Traditional 401(k)/IRA withdrawals are taxed as ordinary income; Roth withdrawals are tax-free; taxable brokerage sales return your cost basis tax-free and tax only the gain at long-term capital-gains rates. The order you draw from these accounts in retirement can meaningfully change your lifetime tax bill.</p>
+  <h3>Required Minimum Distributions (RMDs)</h3>
+  <p>Starting at age 73–75 (depending on birth year), the IRS requires minimum withdrawals from pre-tax accounts whether you need the money or not — which can push retirees into higher brackets. The planner adds these automatically.</p>
+  <h3>Roth conversions</h3>
+  <p>Converting traditional dollars to Roth is taxable today but tax-free later and not subject to future RMDs. The low-income years between retirement and the start of Social Security/RMDs are often the cheapest time to convert.</p>
+  <h3>Rental depreciation &amp; recapture</h3>
+  <p>Residential rental buildings are depreciated over 27.5 years, a non-cash deduction that shelters rental income. When you sell, the depreciation you took is “recaptured” and taxed — the planner models both sides.</p>
+
+  <h2>Assumptions &amp; limitations</h2>
+  <p>This is an educational projection, not tax or financial advice. Notable simplifications: 2025 tax brackets are held flat in future years (no future inflation indexing of brackets); living expenses inflate while wages stay nominal unless you add raises; the planner never sells assets automatically (a cash shortfall is flagged red instead); and several rules are approximated, including the net-investment-income limit on margin-interest deductions, depreciation-recapture rates, IRMAA, AMT, and passive-loss limits. Always confirm with a qualified professional before acting.</p>
+
+  <h2>Frequently asked questions</h2>
+  <dl class="faq">
+    <dt>Is my data saved or sent anywhere?</dt>
+    <dd>No. Everything stays in your browser’s local storage on your device — nothing is uploaded to a server.</dd>
+    <dt>Why did a year turn red?</dt>
+    <dd>Your accessible cash went negative that year. Add a brokerage sale, an account withdrawal, or adjust spending to cover the gap — the planner won’t sell assets for you.</dd>
+    <dt>Does it handle states other than California?</dt>
+    <dd>The tax engine is built for California + federal. You can model moving to a no-income-tax state with the “Move state” event, which drops the state tax.</dd>
+    <dt>Is this financial advice?</dt>
+    <dd>No — it’s an educational tool to explore scenarios. Consult a CPA or financial planner for decisions.</dd>
+  </dl>
+</article>
 
 <!-- EVENT MODAL -->
 <div class="modal-bg" id="modalBg">
