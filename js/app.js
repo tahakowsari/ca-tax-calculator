@@ -427,6 +427,12 @@ function pullGlobalFromInputs(){
 
 /* ===== INIT ===== */
 if (typeof document !== "undefined") {
+// Inline on* handlers in planner.html resolve against window; module-scope
+// functions aren't global, so expose the ones the markup/innerHTML reference.
+Object.assign(window, {
+  resetDemo, newScenario, dupScenario, renameScenario, delScenario, setCompare,
+  addRental, removeRental, updateRental, closeModal, saveEvent, deleteEvent,
+});
 load();
 pushGlobalToInputs();
 [...GMAP,...GRMAP,...HOMEMAP].forEach(([el])=>$(el).addEventListener('input', render));
