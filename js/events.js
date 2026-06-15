@@ -11,6 +11,7 @@
  * ========================================================================== */
 import { fmt } from './tax.js';
 import { Home, Rental, Property } from './property.js';
+import { MarginLoan } from './accounts.js';
 
 export const EVENTS = {
   salary: { icon:'💼', label:'Salary change / raise', fields:[['amount','New annual salary ($)',180000]],
@@ -55,6 +56,18 @@ export const EVENTS = {
 
   oneoff_expense: { icon:'💸', label:'One-off expense', fields:[['amount','Amount ($)',30000]],
     apply:(w,p)=>{ w.one.expense += +p.amount||0; } },
+
+  margin_loan: { icon:'📈', label:'Margin loan (borrow vs. brokerage)', fields:[['amount','Borrow ($)',100000],['rate','Interest rate (%/yr)',7]],
+    apply:(w,p)=>{ const amt = +p.amount||0; w.one.cashOut -= amt;   // proceeds → cash, untaxed (it is debt)
+      w.margins.push(new MarginLoan(amt, +p.rate||0)); } },
+
+  margin_repay: { icon:'💳', label:'Repay margin loan', fields:[['amount','Repay ($, 0 = pay off all)',100000]],
+    apply:(w,p)=>{ const total = w.margins.reduce((s,m)=>s+m.balance, 0);
+      let amt = +p.amount||0; if(amt<=0 || amt>total) amt = total;   // 0 or over-pay → clear the whole balance
+      w.one.expense += amt;                                          // repayment is a cash outflow
+      let rem = amt;
+      for(const ml of w.margins){ const pay = Math.min(rem, ml.balance); ml.balance -= pay; rem -= pay; if(rem<=0) break; }
+      w.margins = w.margins.filter(m => m.balance > 0.01); } },
 
   oneoff_income: { icon:'🎁', label:'One-off income', fields:[['amount','Amount ($)',50000],['taxable','Taxable?|yes,no','']],
     apply:(w,p)=>{ if(p.taxable==='yes') w.one.ordIncome += +p.amount||0; else w.one.taxFree += +p.amount||0; } },
@@ -113,6 +126,8 @@ export function describe(ev){
     case 'rent': return 'Rent '+fmt(p.monthly)+'/mo (+'+p.esc+'%/yr)';
     case 'oneoff_income': return 'Income '+fmt(p.amount)+(p.taxable==='yes'?' (taxable)':' (tax-free)');
     case 'oneoff_expense': return 'Expense '+fmt(p.amount);
+    case 'margin_loan': return 'Margin loan '+fmt(p.amount)+' @ '+p.rate+'%';
+    case 'margin_repay': return (+p.amount>0) ? 'Repay margin '+fmt(p.amount) : 'Pay off all margin';
     case 'sell_rental': return (+p.which>0) ? 'Sell rental #'+p.which : 'Sell all rentals';
     case 'home_to_rental': return 'Convert home → rental ('+fmt(p.rent)+'/mo)';
     case 'rental_to_home': return 'Convert rental #'+(p.which||1)+' → primary home';

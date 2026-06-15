@@ -32,7 +32,7 @@ export function simulate(state, scenarioId, now = new Date().getFullYear()){
     college:null, stateTaxOn:true,
   };
   // the mutable world events operate on
-  const world = { flows, home: homeFromGlobal(g), rentals: rentalsFromGlobal(g), one:null, g, age:0 };
+  const world = { flows, home: homeFromGlobal(g), rentals: rentalsFromGlobal(g), margins: [], one:null, g, age:0 };
 
   const sc = (state.scenarios||[]).find(s=>s.id===scenarioId) || {events:[]};
   const events = (sc.events||[]).filter(e=>e.on).slice().sort((a,b)=>a.age-b.age);
@@ -88,13 +88,18 @@ export function simulate(state, scenarioId, now = new Date().getFullYear()){
     let rentalCash=0, rentalTaxable=0;
     for(const rt of world.rentals){ const {cash:c, taxable:t} = rt.advanceYear(age, gr.re); rentalCash+=c; rentalTaxable+=t; }
 
+    // margin loans: interest accrues onto the balance and is deductible investment interest
+    let marginInterest=0;
+    for(const ml of world.margins) marginInterest += ml.accrueYear();
+    const marginDebt = world.margins.reduce((s,ml)=>s+ml.balance, 0);
+
     const inp = {
-      age, status:g.status, age65:age>=65, spouseAge65:false, itemize:ownsHome,
+      age, status:g.status, age65:age>=65, spouseAge65:false, itemize: ownsHome || marginInterest>0,
       wages:taxableWages, trad401k:wdTrad, rmdInc:rmd, pension:aPension,
       otherOrd:convert + one.ordIncome + rentalTaxable,
       stcg:0, stcgBasis:0, ltcg:taxGain, ltcgBasis:basisBack, qualDiv:0,
       ss:ssThisYear, roth:wdRoth, fiveTwentyNine:0, muniBond:0, hsa:0,
-      mortInt, propTax, stateTax:0, charityCash:0, charityNC:0, medical:0, otherDeduct:0,
+      mortInt, propTax, stateTax:0, charityCash:0, charityNC:0, medical:0, otherDeduct:marginInterest,
     };
     const r = calcAll(inp);
     const fedTax = r.fedTaxTotal;
@@ -130,13 +135,13 @@ export function simulate(state, scenarioId, now = new Date().getFullYear()){
 
     const homeEquity = ownsHome ? world.home.equity() : 0;
     const rentalEquity = world.rentals.reduce((s,rt)=>s+rt.equity(), 0);
-    const netWorth = cash + acct.taxable.balance + acct.trad.balance + acct.roth.balance + acct.hsa.balance + homeEquity + rentalEquity;
+    const netWorth = cash + acct.taxable.balance + acct.trad.balance + acct.roth.balance + acct.hsa.balance + homeEquity + rentalEquity - marginDebt;
     const shortfall = cash < -1;
 
     rows[age] = {
       age, year:now+k,
       bal:{cash, taxable:acct.taxable.balance, basis:acct.taxable.basis, trad:acct.trad.balance, roth:acct.roth.balance, hsa:acct.hsa.balance},
-      homeEquity, rentalEquity, netWorth, shortfall,
+      homeEquity, rentalEquity, marginDebt, marginInterest, netWorth, shortfall,
       income:{wages:taxableWages, ss:ssThisYear, pension:aPension, wdTrad, rmd, wdRoth, wdTaxable, convert, taxGain, rental:rentalCash},
       fedTax, caTax, tax, stateTaxOn:flows.stateTaxOn,
       expenses, living, housingCost, collegeCost, oneoff:one.expense+one.cashOut,

@@ -46,3 +46,12 @@ export class RothAccount extends Account {
 
 // HSA: grows tax-free (modeled at the stock growth rate by the engine).
 export class HSAAccount extends Account {}
+
+// Margin loan: borrowed against the brokerage. Proceeds are NOT taxable income
+// (it's debt). Interest accrues onto the balance each year and is deductible as
+// investment-interest expense. A liability — reduces net worth.
+export class MarginLoan {
+  constructor(balance = 0, rate = 0){ this.balance = balance; this.rate = rate; }
+  // Accrue one year of interest onto the balance; returns the interest amount.
+  accrueYear(){ const i = this.balance * this.rate / 100; this.balance += i; return i; }
+}

@@ -246,6 +246,7 @@ function stateBox(scid,slot,row){
     <div class="srow"><span>HSA</span><span>${fmt(row.bal.hsa)}</span></div>
     ${row.homeEquity>0?`<div class="srow"><span>Home equity</span><span>${fmt(row.homeEquity)}</span></div>`:''}
     ${row.rentalEquity>0?`<div class="srow"><span>Rental property equity</span><span>${fmt(row.rentalEquity)}</span></div>`:''}
+    ${row.marginDebt>0?`<div class="srow"><span>Margin loan (−, ${fmtS(-row.marginInterest)} int. deducted)</span><span class="neg">${fmtS(-row.marginDebt)}</span></div>`:''}
     <div class="sec">This year's cash flow</div>
     ${incRows||'<div class="srow"><span>No taxable income</span><span>—</span></div>'}
     <div class="srow"><span>Federal tax</span><span class="neg">${fmtS(-row.fedTax)}</span></div>

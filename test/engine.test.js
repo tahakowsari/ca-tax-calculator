@@ -100,6 +100,34 @@ test('engine: can invest into and withdraw from the taxable brokerage', () => {
   assert.ok(wd[65].bal.taxable < base2[65].bal.taxable, 'withdrawing should shrink the brokerage balance');
 });
 
+test('engine: margin loan — untaxed cash, growing debt, deductible interest', () => {
+  const loan = simulate(withEvents([{id:'m', type:'margin_loan', age:55, p:{amount:200000, rate:7}, on:true}],
+    {wages:0, ss:0, spending:40000}), 'A', NOW);
+  const base = simulate(demoState({wages:0, ss:0, spending:40000}), 'A', NOW);
+
+  // proceeds land as cash in the borrow year, ~+$200k vs baseline
+  assert.ok(loan[55].bal.cash - base[55].bal.cash > 150000, 'borrow proceeds should boost cash');
+  // proceeds are NOT taxable income → tax must not rise (and the interest deduction can lower it)
+  assert.ok(loan[55].fedTax <= base[55].fedTax + 1, 'loan proceeds are not taxed');
+  // debt accrues interest and grows over time
+  assert.ok(loan[55].marginDebt >= 200000, 'debt present in borrow year (incl. first-year interest)');
+  assert.ok(loan[60].marginDebt > loan[55].marginDebt, 'debt compounds with interest');
+  // the brokerage was NOT sold — its balance tracks the no-loan baseline
+  near(loan[60].bal.taxable, base[60].bal.taxable, 1);
+});
+
+test('engine: repaying a margin loan clears the debt and costs cash', () => {
+  const s = withEvents([
+    {id:'m', type:'margin_loan',  age:55, p:{amount:200000, rate:7}, on:true},
+    {id:'p', type:'margin_repay', age:60, p:{amount:0}, on:true},   // 0 = pay off all
+  ], {wages:0, ss:0, spending:40000, cash:400000});
+  const A = simulate(s, 'A', NOW);
+  assert.ok(A[59].marginDebt > 200000, 'debt still outstanding before payoff');
+  assert.equal(Math.round(A[60].marginDebt), 0, 'debt cleared in the payoff year');
+  assert.ok(A[60].bal.cash < A[59].bal.cash, 'paying off costs cash');
+  assert.equal(A[61].marginInterest, 0, 'no more interest after payoff');
+});
+
 test('engine: a rental adds equity and taxable net rent', () => {
   const s = demoState({ rentals:[{value:700000,balance:300000,rate:5,term:25,rent:3500,esc:3,
     propTaxPct:1.1,insure:1500,maint:3000,costBasis:600000,landPct:20,yearsOwned:5}] });
